@@ -1,0 +1,55 @@
+$light-shades: (
+    100: #FAFAFA,
+    200: #EEEEEE,
+    300: #BDBDBD,
+    400: #9E9E9E
+);
+
+@function light($strength) {
+    $hex: map-get($light-shades, $strength);
+
+    @return $hex;
+}
+
+$dark-shades: (
+    100: #363635,
+    200: #2e2e2e,
+    300: #212121,
+    400: #141414
+);
+
+@function dark($strength) {
+    $hex: map-get($dark-shades, $strength);
+
+    @return $hex;
+}
+
+$blue-shades: (
+    100: #2196F3,
+    200: #1E88E5,
+    300: #1976D2,
+    400: #1565C0
+);
+
+@function blue($strength) {
+    $hex: map-get($blue-shades, $strength);
+
+    @return $hex;
+}
+
+$red-shades: (
+    100: #F44336,
+    200: #D32F2F,
+    300: #C62828,
+    400: #B71C1C
+);
+
+@function red($strength) {
+    $hex: map-get($red-shades, $strength);
+
+    @return $hex;
+}
+
+.darkmode {
+    background-color: dark(400);
+}

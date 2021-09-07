@@ -1,0 +1,49 @@
+@import "./variables.scss";
+
+// buttons
+.btn {
+    display: inline-block;
+    width: fit-content;
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid light(200);
+    border-radius: 6px;
+    padding: 0 10px 0 10px;
+    text-align: center;
+    font-size: 24px;
+    cursor: pointer;
+
+    // button styles
+    &.borderless {
+        border: none;
+        box-sizing: content-box;
+    }
+
+    // material icons
+    span.material-icons {
+        vertical-align: top;
+        line-height: 40px;
+    }
+}
+
+// box model - margin and padding classes
+
+$properties: margin, padding;
+$directions: top, right, bottom, left;
+$sizes: 5, 10, 20, 30, 40, 50, 100;
+
+@each $property in $properties {
+    @each $direction in $directions {
+        @each $size in $sizes {
+            .#{str-slice($property, 1, 1)}#{str-slice($direction, 1, 1)}-#{$size} {
+                #{$property}-#{$direction}: #{$size}px !important;
+            }
+        }
+    }
+}
+
+// sections
+.border-section {
+    border-bottom: 1px solid light(200);
+    padding-bottom: 20px;
+}
