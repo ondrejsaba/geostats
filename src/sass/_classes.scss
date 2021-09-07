@@ -11,12 +11,60 @@
     padding: 0 10px 0 10px;
     text-align: center;
     font-size: 24px;
+    color: dark(100);
     cursor: pointer;
 
     // button styles
     &.borderless {
         border: none;
         box-sizing: content-box;
+    }
+
+    &.primary {
+        background-color: blue(100);
+        border: 1px solid blue(100);
+        color: light(100);
+    }
+
+    // text modifiers
+    &.s-text {
+        font-size: 18px;
+    }
+
+    &.m-text {
+        font-size: 24px;
+    }
+
+    &.l-text {
+        font-size: 32px;
+    }
+
+    // size modifiers
+    &.s-size {
+        height: 30px;
+        line-height: 30px;
+
+        span.material-icons {
+            line-height: 30px;
+        }
+    }
+
+    &.m-size {
+        height: 40px;
+        line-height: 40px;
+
+        span.material-icons {
+            line-height: 40px;
+        }
+    }
+
+    &.l-size {
+        height: 50px;
+        line-height: 50px;
+
+        span.material-icons {
+            line-height: 50px;
+        }
     }
 
     // material icons
@@ -45,5 +93,5 @@ $sizes: 5, 10, 20, 30, 40, 50, 100;
 // sections
 .border-section {
     border-bottom: 1px solid light(200);
-    padding-bottom: 20px;
+    padding: 20px 0 20px 0;
 }

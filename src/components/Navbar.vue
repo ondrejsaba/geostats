@@ -7,7 +7,7 @@
         </div>
 
         <div id="title" class="pl-10">
-            Geostats
+            Geostats 🌍
         </div>
     </nav>
 </template>
@@ -22,9 +22,12 @@ export default {
 @import "../sass/_variables.scss";
 
 nav {
+    position: fixed;
+    margin: 0;
     width: 100%;
     height: 60px;
     border-bottom: 1px solid light(200);
+    background-color: light(100);
     
     #title {
         display: inline-block;

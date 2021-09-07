@@ -1,5 +1,5 @@
 <template>
-    <section id="search-section" class="border-section">
+    <section id="search-section">
         <input
             type="text"
             class="search mt-20"
