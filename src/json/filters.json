@@ -1,0 +1,44 @@
+{
+    "world": {
+        "name": {
+            "en": "World",
+            "cz": "Celý svět"
+        }
+    },
+    "asia": {
+        "name": {
+            "en": "Asia",
+            "cz": "Asie"
+        }
+    },
+    "africa": {
+        "name": {
+            "en": "Africa",
+            "cz": "Afrika"
+        }
+    },
+    "europe": {
+        "name": {
+            "en": "Europe",
+            "cz": "Evropa"
+        }
+    },
+    "north_america": {
+        "name": {
+            "en": "North America",
+            "cz": "Severní Amerika"
+        }
+    },
+    "south_america": {
+        "name": {
+            "en": "South America",
+            "cz": "Jižní Amerika"
+        }
+    },
+    "australia": {
+        "name": {
+            "en": "Australia",
+            "cz": "Austrálie"
+        }
+    }
+}

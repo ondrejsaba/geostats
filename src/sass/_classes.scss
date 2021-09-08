@@ -22,7 +22,7 @@
 
     &.primary {
         background-color: blue(100);
-        border: 1px solid blue(100);
+        border: 1px solid blue(200);
         color: light(100);
     }
 
@@ -91,7 +91,8 @@ $sizes: 5, 10, 20, 30, 40, 50, 100;
 }
 
 // sections
-.border-section {
-    border-bottom: 1px solid light(200);
-    padding: 20px 0 20px 0;
+.center-section {
+    display: block;
+    width: calc(100% - 80px);
+    margin: 0 auto;
 }

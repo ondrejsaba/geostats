@@ -21,6 +21,7 @@ export default {
     &:not(.primary) {
         &:hover {
             background-color: darken(light(100), 1%);
+            border: 1px solid light(300);
         }
 
         &:active {
