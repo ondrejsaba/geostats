@@ -66,6 +66,7 @@ export default {
     min-height: 280px;
     margin-bottom: 20px;
     border: 1px solid light(200);
+    box-sizing: border-box;
     border-radius: 8px;
 
     h2 {
@@ -74,6 +75,10 @@ export default {
         text-align: center;
         line-height: 30px;
         font-size: 24px;
+    }
+
+    &:not(:nth-child(3n+0)) {
+        margin-right: 20px;
     }
 }
 

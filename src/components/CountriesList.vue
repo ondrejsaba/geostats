@@ -33,7 +33,6 @@ export default {
 #countries-list-section {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     border-top: 1px solid light(200);
     padding-top: 20px;
 }

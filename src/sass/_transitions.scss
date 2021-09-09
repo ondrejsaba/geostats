@@ -1,0 +1,35 @@
+// fade animation
+
+.fade-enter-from, .fade-leave-to {
+    opacity: 0;
+}
+
+.fade-leave-from, .fade-enter-to {
+    opacity: 1;
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 0.1s ease;
+}
+
+.fade-leave-active {
+    transition-delay: 0.1s;
+}
+
+// menu slide animation
+
+.menu-slide-enter-from, .menu-slide-leave-to {
+    left: -400px;
+}
+
+.menu-slide-leave-from, .menu-slide-enter-to {
+    left: 0;
+}
+
+.menu-slide-enter-active, .menu-slide-leave-active {
+    transition: all 0.1s ease;
+}
+
+.menu-slide-enter-active {
+    transition-delay: 0.1s;
+}

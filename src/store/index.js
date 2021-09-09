@@ -21,6 +21,11 @@ export default createStore({
     setPickedFilter(state, payload) {
       const {id} = payload
       state.pickedFilter = id
+    },
+
+    setCountriesData(state, payload) {
+      const {data} = payload
+      state.countriesData = data
     }
   },
   actions: {
@@ -31,7 +36,7 @@ export default createStore({
           return response.json()
         })
         .then((data) => {
-          context.state.countriesData = data
+          context.commit('setCountriesData', {data: data})
         })
     }
   },

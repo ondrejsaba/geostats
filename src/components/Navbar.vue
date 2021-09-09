@@ -1,8 +1,8 @@
 <template>
     <nav>
-        <div class="btn borderless mt-10 ml-10">
+        <div class="btn borderless mt-10 ml-10" @click="setMenuOpened">
             <span class="material-icons">
-                menu
+                {{ menuIcon }}
             </span>
         </div>
 
@@ -13,8 +13,22 @@
 </template>
 
 <script>
-export default {
+import { mapMutations, mapGetters } from 'vuex'
 
+export default {
+    methods: {
+        ...mapMutations([
+            'setMenuOpened'
+        ])
+    },
+    computed: {
+        ...mapGetters([
+            'menuOpened'
+        ]),
+        menuIcon() {
+            return this.menuOpened ? 'close' : 'menu'
+        }
+    }
 }
 </script>
 
@@ -23,12 +37,14 @@ export default {
 
 nav {
     position: fixed;
+    z-index: 100;
     margin: 0;
     width: 100%;
     height: 60px;
     border-bottom: 1px solid light(200);
+    box-sizing: border-box;
     background-color: light(100);
-    z-index: 100;
+    user-select: none;
     
     #title {
         display: inline-block;
