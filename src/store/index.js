@@ -8,6 +8,10 @@ export default createStore({
     // filters
     pickedFilter: 'world',
 
+    // search
+    searchMode: false,
+    searchQuery: '',
+
     // countries data
     countriesData: []
   },
@@ -23,6 +27,21 @@ export default createStore({
       state.pickedFilter = id
     },
 
+    // search
+    setSearchMode(state) {
+      state.searchMode = !state.searchMode
+    },
+
+    setSearchQuery(state, payload) {
+      const {query} = payload
+      state.searchQuery = query
+
+      /* if a search query is set (its length is greater than zero),
+      then enable the search mode */
+      state.searchMode = query.length > 0
+    },
+
+    // countries data
     setCountriesData(state, payload) {
       const {data} = payload
       state.countriesData = data
@@ -49,6 +68,15 @@ export default createStore({
     // filters
     pickedFilter(state) {
       return state.pickedFilter
+    },
+
+    // search
+    searchMode(state) {
+      return state.searchMode
+    },
+
+    searchQuery(state) {
+      return state.searchQuery
     },
 
     // countries data

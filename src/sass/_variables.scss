@@ -2,7 +2,8 @@ $light-shades: (
     100: #FAFAFA,
     200: #EEEEEE,
     300: #BDBDBD,
-    400: #9E9E9E
+    400: #9E9E9E,
+    500: #8f8e8e
 );
 
 @function light($strength) {

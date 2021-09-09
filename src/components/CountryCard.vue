@@ -1,7 +1,7 @@
 <template>
     <div
         class="country-card"
-        v-if="pickedFilter == countryFilter || pickedFilter == 'world'"
+        v-if="canShowCard"
     >
         <h2>{{ countryInfo.name }}</h2>
 
@@ -40,7 +40,9 @@ export default {
     ],
     computed: {
         ...mapGetters([
-            'pickedFilter'
+            'pickedFilter',
+            'searchMode',
+            'searchQuery'
         ]),
         countryFilter() {
             if (this.countryInfo.region == 'Americas') {
@@ -51,6 +53,13 @@ export default {
                 }
             } else {
                 return this.countryInfo.region.charAt(0).toLowerCase() + this.countryInfo.region.slice(1)
+            }
+        },
+        canShowCard() {
+            if (this.searchMode) {
+                return this.countryInfo.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+            } else {
+                return this.pickedFilter == this.countryFilter || this.pickedFilter == 'world'
             }
         }
     }

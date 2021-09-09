@@ -1,7 +1,9 @@
 <template>
   <main class="content">
     <Search />
-    <Filters />
+    <Filters
+      v-if="!searchMode"
+    />
     <CountriesList />
   </main>
 </template>
@@ -10,6 +12,7 @@
 import Search from '../components/Search.vue'
 import Filters from '../components/Filters.vue'
 import CountriesList from '../components/CountriesList.vue'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Home',
@@ -17,6 +20,11 @@ export default {
     Search,
     Filters,
     CountriesList
+  },
+  computed: {
+    ...mapGetters([
+      'searchMode'
+    ])
   }
 }
 </script>
