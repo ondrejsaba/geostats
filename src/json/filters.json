@@ -35,10 +35,10 @@
             "cz": "Jižní Amerika"
         }
     },
-    "australia": {
+    "oceania": {
         "name": {
-            "en": "Australia",
-            "cz": "Austrálie"
+            "en": "Oceania",
+            "cz": "Oceánie"
         }
     }
 }

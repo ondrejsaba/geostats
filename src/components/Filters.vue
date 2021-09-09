@@ -4,7 +4,8 @@
             v-for="(filter, id) in filters"
             :key="id"
             :class="{
-                primary: id == pickedFilter
+                primary: id == pickedFilter,
+                light: id != pickedFilter
             }"
             @click="setPickedFilter({
                 id: id
@@ -42,7 +43,8 @@ export default {
 }
 </script>
 
-<style lang="scss">
-@import "../sass/_variables.scss";
-
+<style>
+section#filters-section {
+    width: fit-content;
+}
 </style>

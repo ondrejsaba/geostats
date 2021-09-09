@@ -25,10 +25,12 @@ $dark-shades: (
 }
 
 $blue-shades: (
-    100: #2196F3,
-    200: #1E88E5,
-    300: #1976D2,
-    400: #1565C0
+    100: #4779ff,
+    200: #386eff,
+    300: #2b64ff,
+    400: #1e5aff,
+    500: #0044ff,
+    600: #0032bd
 );
 
 @function blue($strength) {

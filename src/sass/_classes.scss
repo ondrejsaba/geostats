@@ -24,19 +24,42 @@
         background-color: blue(100);
         border: 1px solid blue(200);
         color: light(100);
+
+        &:hover {
+            border: 1px solid blue(300);
+            background-color: blue(200);
+        }
+
+        &:active {
+            border: 1px solid blue(400);
+            background-color: blue(300);
+        }
+    }
+
+    &.light {
+        border: 1px solid light(200);
+
+        &:hover {
+            border: 1px solid light(300);
+            background-color: darken(light(100), 1%);
+        }
+
+        &:active {
+            background-color: darken(light(100), 2%);
+        }
     }
 
     // text modifiers
     &.s-text {
-        font-size: 18px;
+        font-size: 16px;
     }
 
     &.m-text {
-        font-size: 24px;
+        font-size: 18px;
     }
 
     &.l-text {
-        font-size: 32px;
+        font-size: 20px;
     }
 
     // size modifiers
@@ -78,7 +101,7 @@
 
 $properties: margin, padding;
 $directions: top, right, bottom, left;
-$sizes: 5, 10, 20, 30, 40, 50, 100;
+$sizes: 5, 10, 15, 20, 25, 30, 40, 50, 100;
 
 @each $property in $properties {
     @each $direction in $directions {
@@ -94,5 +117,11 @@ $sizes: 5, 10, 20, 30, 40, 50, 100;
 .center-section {
     display: block;
     width: calc(100% - 80px);
+    margin: 0 auto;
+}
+
+// misc
+.center {
+    display: block;
     margin: 0 auto;
 }

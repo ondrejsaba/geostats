@@ -1,11 +1,10 @@
 <template>
-    <section id="countries-list-section" class="center-section mt-50">
+    <section id="countries-list-section" class="center-section mt-20">
         <CountryCard
             v-for="country in countriesData"
-            :key="country"
-        >
-            {{ country.name }}
-        </CountryCard>
+            :key="country.name"
+            :countryInfo="country"
+        />
     </section>
 </template>
 
@@ -29,10 +28,13 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../sass/_variables.scss";
+
 #countries-list-section {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center;
+    border-top: 1px solid light(200);
+    padding-top: 20px;
 }
 </style>

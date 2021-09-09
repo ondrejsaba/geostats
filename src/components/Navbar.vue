@@ -28,6 +28,7 @@ nav {
     height: 60px;
     border-bottom: 1px solid light(200);
     background-color: light(100);
+    z-index: 100;
     
     #title {
         display: inline-block;
