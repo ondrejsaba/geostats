@@ -14,12 +14,21 @@
         </div>
 
         <div class="btns-wrapper">
-            <div class="btn light s-size s-text">
-                Statistics
-                <span class="material-icons">
-                    trending_up
-                </span>
-            </div>
+            <router-link
+                :to="{
+                    name: 'Statistics',
+                    params: {
+                        country: countryInfo.name
+                    }
+                }"
+            >
+                <div class="btn light s-size s-text">
+                    Statistics
+                    <span class="material-icons">
+                        trending_up
+                    </span>
+                </div>
+            </router-link>
 
             <div
                 class="btn s-size s-text ml-10"

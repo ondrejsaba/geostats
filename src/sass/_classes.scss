@@ -163,6 +163,14 @@ $sizes: 5, 10, 15, 20, 25, 30, 40, 50, 100;
     margin: 0 auto;
 }
 
+main.content {
+    display: block;
+    width: 70%;
+    height: auto;
+    margin: 0 auto;
+    padding-top: 60px;
+}
+
 // misc
 .center {
     display: block;

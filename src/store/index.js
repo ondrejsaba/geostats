@@ -28,6 +28,9 @@ export default createStore({
     setPickedFilter(state, payload) {
       const {id} = payload
       state.pickedFilter = id
+
+      // reset shown cards
+      state.shownCards = 0
     },
 
     // search

@@ -6,31 +6,41 @@
             </span>
         </div>
 
-        <div id="title" class="pl-10">
-            Geostats 🌍
-        </div>
-
-        <div
-            class="btn right m-text mr-10 mt-10"
-            :class="{
-                light: !comparisonList.length,
-                primary: comparisonList.length
-            }"
-        >
-            Compare countries
-
-            <span v-if="comparisonList.length">
-                ({{ comparisonList.length }})
-            </span>
-
-            <span class="material-icons">
-                bar_chart
-            </span>
-
-            <div class="hint hint-bottom" v-if="!comparisonList.length">
-                There are no countries in you comparison list.
+        <router-link :to="{ name: 'Home' }">
+            <div id="title" class="pl-10">
+                Geostats 🌍
             </div>
-        </div>
+        </router-link>
+
+        <router-link
+            v-if="comparisonList.length && $route.name != 'Compare'"
+            :to="{ name: 'Compare' }"
+        >
+            <div class="btn primary right m-text mr-10 mt-10">
+                Compare countries ({{ comparisonList.length }})
+
+                <span class="material-icons">
+                    bar_chart
+                </span>
+
+                <div class="hint hint-bottom" v-if="!comparisonList.length">
+                    There are no countries in your comparison list.
+                </div>
+            </div>
+        </router-link>
+
+        <router-link
+            v-else-if="['Compare', 'Statistics'].includes($route.name)"
+            :to="{ name: 'Home' }"
+        >
+            <div class="btn light right m-text mr-10 mt-10">
+                Back
+
+                <span class="material-icons">
+                    arrow_forward
+                </span>
+            </div>
+        </router-link>
     </nav>
 </template>
 
@@ -75,6 +85,7 @@ nav {
         line-height: 60px;
         font-size: 24px;
         font-weight: 600;
+        color: dark(400);
     }
 }
 </style>

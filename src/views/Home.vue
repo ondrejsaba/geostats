@@ -28,15 +28,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-@import "../sass/_variables.scss";
-
-main.content {
-  display: block;
-  width: 70%;
-  height: auto;
-  margin: 0 auto;
-  padding-top: 60px;
-}
-</style>
