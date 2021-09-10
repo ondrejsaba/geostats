@@ -1,28 +1,62 @@
 <template>
-    <section id="countries-list-section" class="center-section mt-20">
+    <section
+        v-if="filteredCountriesData.length > 0"
+        id="countries-list-section"
+        class="center-section mt-20"
+    >
         <CountryCard
-            v-for="country in countriesData"
+            v-for="country in filteredCountriesData"
             :key="country.name"
             :countryInfo="country"
         />
+    </section>
+    
+    <section
+        v-else-if="searchMode"
+        class="no-cards"
+    >
+        <h2>No countries found.</h2>
+    </section>
+
+    <section
+        v-else
+        class="no-cards"
+    >
+        <h2>Loading, please wait...</h2>
     </section>
 </template>
 
 <script>
 import CountryCard from './CountryCard.vue'
-import { mapGetters } from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
 
 export default {
     components: {
         CountryCard
     },
+    methods: {
+        ...mapMutations([
+            'setFilteredCountriesData'
+        ])
+    },
     computed: {
         ...mapGetters([
-            'countriesData'
+            'filteredCountriesData',
+            'pickedFilter',
+            'searchMode',
+            'searchQuery'
         ])
     },
     mounted() {
         this.$store.dispatch('getCountriesData')
+    },
+    watch: {
+        pickedFilter: function() {
+            this.setFilteredCountriesData()
+        },
+        searchQuery: function() {
+            this.setFilteredCountriesData()
+        }
     }
 }
 </script>
@@ -35,5 +69,15 @@ export default {
     flex-wrap: wrap;
     border-top: 1px solid light(200);
     padding-top: 20px;
+}
+
+section.no-cards {
+    text-align: center;
+    padding-top: 40px;
+    color: light(500);
+
+    h2 {
+        font-size: 24px;
+    }
 }
 </style>

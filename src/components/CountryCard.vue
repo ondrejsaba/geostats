@@ -1,7 +1,6 @@
 <template>
     <div
         class="country-card"
-        v-if="canShowCard"
     >
         <h2>{{ countryInfo.name }}</h2>
 
@@ -74,25 +73,6 @@ export default {
             'searchQuery',
             'comparisonList'
         ]),
-        countryFilter() {
-            if (this.countryInfo.region == 'Americas') {
-                if (['Carribean', 'South America'].includes(this.countryInfo.subregion)) {
-                    return 'south_america'
-                } else {
-                    return 'north_america'
-                }
-            } else {
-                return this.countryInfo.region.charAt(0).toLowerCase() + this.countryInfo.region.slice(1)
-            }
-        },
-        canShowCard() {
-            if (this.searchMode) {
-                // check whether the name of the country contains a part of the current search query
-                return this.countryInfo.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-            } else {
-                return this.pickedFilter == this.countryFilter || this.pickedFilter == 'world'
-            }
-        },
         isBeingCompared() {
             return this.comparisonList.includes(this.countryInfo.name)
         }

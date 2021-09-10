@@ -51,14 +51,14 @@ export default {
     z-index: 25;
     font-size: 22px;
     color: light(300);
-    left: 40px;
+    left: 50px;
     top: 10px;
 }
 
 input[type=text].search {
     display: block;
     position: relative;
-    width: calc(100% - 100px);
+    width: calc(100% - 120px);
     height: 40px;
     margin: 0 auto;
     border: 1px solid light(200);

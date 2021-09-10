@@ -16,7 +16,8 @@ export default createStore({
     comparisonList: [],
 
     // countries data
-    countriesData: []
+    countriesData: [],
+    filteredCountriesData: []
   },
   mutations: {
     // menu
@@ -62,6 +63,30 @@ export default createStore({
     setCountriesData(state, payload) {
       const {data} = payload
       state.countriesData = data
+    },
+
+    setFilteredCountriesData(state) {
+      if (state.searchMode) {
+        state.filteredCountriesData = state.countriesData.filter(country => {
+          return country.name.toLowerCase().includes(state.searchQuery.toLowerCase())
+        })
+      } else {
+        state.filteredCountriesData = state.countriesData.filter(country => {
+          let filterId = ''
+
+          if (country.region == 'Americas') {
+            if (['Caribbean', 'South America'].includes(country.subregion)) {
+              filterId = 'south_america'
+            } else {
+              filterId = 'north_america'
+            }
+          } else {
+            filterId = country.region.charAt(0).toLowerCase() + country.region.slice(1)
+          }
+
+          return filterId == state.pickedFilter || state.pickedFilter == 'world'
+        })
+      }
     }
   },
   actions: {
@@ -73,6 +98,7 @@ export default createStore({
         })
         .then((data) => {
           context.commit('setCountriesData', {data: data})
+          context.commit('setFilteredCountriesData')
         })
     }
   },
@@ -104,6 +130,10 @@ export default createStore({
     // countries data
     countriesData(state) {
       return state.countriesData
+    },
+
+    filteredCountriesData(state) {
+      return state.filteredCountriesData
     }
   }
 })
