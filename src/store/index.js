@@ -12,6 +12,9 @@ export default createStore({
     searchMode: false,
     searchQuery: '',
 
+    // comparison list
+    comparisonList: [],
+
     // countries data
     countriesData: []
   },
@@ -39,6 +42,17 @@ export default createStore({
       /* if a search query is set (its length is greater than zero),
       then enable the search mode */
       state.searchMode = query.length > 0
+    },
+
+    // comparison list
+    modifyComparisonList(state, payload) {
+      const {countryName} = payload
+      
+      if (!state.comparisonList.includes(countryName)) {
+        state.comparisonList.push(countryName)
+      } else {
+        state.comparisonList = state.comparisonList.filter(country => country != countryName)
+      }
     },
 
     // countries data
@@ -77,6 +91,11 @@ export default createStore({
 
     searchQuery(state) {
       return state.searchQuery
+    },
+
+    // comparison list
+    comparisonList(state) {
+      return state.comparisonList
     },
 
     // countries data

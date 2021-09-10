@@ -62,4 +62,20 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: dark(100);
+
+  &:hover {
+    background-color: dark(300);
+  }
+}
+
+::-webkit-scrollbar-track {
+  border-left: 1px solid light(200);
+}
 </style>

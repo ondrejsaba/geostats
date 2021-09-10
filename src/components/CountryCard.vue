@@ -21,10 +21,23 @@
                 </span>
             </div>
 
-            <div class="btn primary s-size s-text ml-10">
-                Add to comparison
+            <div
+                class="btn s-size s-text ml-10"
+                :class="{
+                    primary: !isBeingCompared,
+                    red: isBeingCompared
+                }"
+                @click="modifyComparisonList"
+            >
+                <span v-if="!isBeingCompared">
+                    Add to comparison
+                </span>
+                <span v-else>
+                    Remove
+                </span>
+
                 <span class="material-icons">
-                    add
+                    {{ isBeingCompared ? 'remove' : 'add' }}
                 </span>
             </div>
         </div>
@@ -38,11 +51,19 @@ export default {
     props: [
         'countryInfo'
     ],
+    methods: {
+        modifyComparisonList() {
+            this.$store.commit('modifyComparisonList', {
+                countryName: this.countryInfo.name
+            })
+        }
+    },
     computed: {
         ...mapGetters([
             'pickedFilter',
             'searchMode',
-            'searchQuery'
+            'searchQuery',
+            'comparisonList'
         ]),
         countryFilter() {
             if (this.countryInfo.region == 'Americas') {
@@ -57,10 +78,14 @@ export default {
         },
         canShowCard() {
             if (this.searchMode) {
+                // check whether the name of the country contains a part of the current search query
                 return this.countryInfo.name.toLowerCase().includes(this.searchQuery.toLowerCase())
             } else {
                 return this.pickedFilter == this.countryFilter || this.pickedFilter == 'world'
             }
+        },
+        isBeingCompared() {
+            return this.comparisonList.includes(this.countryInfo.name)
         }
     }
 }

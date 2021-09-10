@@ -9,6 +9,28 @@
         <div id="title" class="pl-10">
             Geostats 🌍
         </div>
+
+        <div
+            class="btn right m-text mr-10 mt-10"
+            :class="{
+                light: !comparisonList.length,
+                primary: comparisonList.length
+            }"
+        >
+            Compare countries
+
+            <span v-if="comparisonList.length">
+                ({{ comparisonList.length }})
+            </span>
+
+            <span class="material-icons">
+                bar_chart
+            </span>
+
+            <div class="hint hint-bottom" v-if="!comparisonList.length">
+                There are no countries in you comparison list.
+            </div>
+        </div>
     </nav>
 </template>
 
@@ -23,7 +45,8 @@ export default {
     },
     computed: {
         ...mapGetters([
-            'menuOpened'
+            'menuOpened',
+            'comparisonList'
         ]),
         menuIcon() {
             return this.menuOpened ? 'close' : 'menu'

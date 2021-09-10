@@ -3,6 +3,7 @@
 // buttons
 .btn {
     display: inline-block;
+    position: relative;
     width: fit-content;
     height: 40px;
     line-height: 40px;
@@ -33,6 +34,22 @@
         &:active {
             border: 1px solid blue(400);
             background-color: blue(300);
+        }
+    }
+
+    &.red {
+        background-color: red(100);
+        border: 1px solid red(200);
+        color: light(100);
+
+        &:hover {
+            border: 1px solid red(300);
+            background-color: red(200);
+        }
+
+        &:active {
+            border: 1px solid red(400);
+            background-color: red(300);
         }
     }
 
@@ -95,6 +112,32 @@
         vertical-align: top;
         line-height: 40px;
     }
+
+    // hints
+
+    .hint {
+        display: none;
+        position: absolute;
+        left: 50%;
+        width: fit-content;
+        max-width: calc(100% - 20px);
+        height: calc(40px - 5px);
+        border-radius: 6px;
+        transform: translateX(-50%);
+        background-color: rgba(dark(300), 0.5);
+        font-size: 14px;
+        line-height: 15px;
+        padding-top: 5px;
+        color: light(100);
+    }
+
+    .hint-bottom {
+        bottom: -55px;
+    }
+
+    &:hover .hint {
+        display: block;
+    }
 }
 
 // box model - margin and padding classes
@@ -124,4 +167,8 @@ $sizes: 5, 10, 15, 20, 25, 30, 40, 50, 100;
 .center {
     display: block;
     margin: 0 auto;
+}
+
+.right {
+    float: right;
 }
