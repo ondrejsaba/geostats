@@ -1,20 +1,22 @@
 <template>
-  <Navbar />
+  <div id="page" :class="{ dark: options.darkMode }">
+    <Navbar />
 
-  <transition name="fade">
-    <DarkenBox
-      v-if="showDarkenBox"
-      @click="hideDarkenBox"
-    />
-  </transition>
+    <transition name="fade">
+      <DarkenBox
+        v-if="showDarkenBox"
+        @click="hideDarkenBox"
+      />
+    </transition>
 
-  <transition name="menu-slide">
-    <SideMenu
-      v-if="menuOpened"
-    />
-  </transition>
+    <transition name="menu-slide">
+      <SideMenu
+        v-if="menuOpened"
+      />
+    </transition>
 
-  <router-view />
+    <router-view />
+  </div>
 </template>
 
 <script>
@@ -31,7 +33,8 @@ export default {
   },
   methods: {
     ...mapMutations([
-      'setMenuOpened'
+      'setMenuOpened',
+      'syncOptions'
     ]),
     hideDarkenBox() {
       // hide everything that the darken box depends on
@@ -40,16 +43,21 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'menuOpened'
+      'menuOpened',
+      'options'
     ]),
     showDarkenBox() {
       return this.menuOpened
     }
+  },
+  mounted() {
+    this.syncOptions()
   }
 }
 </script>
 
 <style lang="scss">
+@import "./sass/_variables.scss";
 @import "./sass/_classes.scss";
 @import "./sass/_transitions.scss";
 
@@ -61,6 +69,16 @@ body {
   font-family: Inter, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+#page {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+
+  &.dark {
+    background-color: dark(200);
+  }
 }
 
 ::-webkit-scrollbar {

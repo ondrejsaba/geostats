@@ -5,7 +5,8 @@
             :key="id"
             :class="{
                 primary: id == pickedFilter,
-                light: id != pickedFilter
+                light: id != pickedFilter && !options.darkMode,
+                dark: id != pickedFilter && options.darkMode
             }"
             @click="setPickedFilter({
                 id: id
@@ -37,7 +38,8 @@ export default {
     },
     computed: {
         ...mapGetters([
-            'pickedFilter'
+            'pickedFilter',
+            'options'
         ])
     }
 }

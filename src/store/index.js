@@ -17,7 +17,10 @@ export default createStore({
 
     // countries data
     countriesData: [],
-    filteredCountriesData: []
+    filteredCountriesData: [],
+
+    // local storage
+    options: {}
   },
   mutations: {
     // menu
@@ -87,6 +90,24 @@ export default createStore({
           return filterId == state.pickedFilter || state.pickedFilter == 'world'
         })
       }
+    },
+
+    // local storage
+    syncOptions(state) {
+      if (!localStorage.localOptions) {
+        localStorage.setItem('localOptions', JSON.stringify({
+          darkMode: false
+        }))
+      }
+
+      state.options = JSON.parse(localStorage.localOptions)
+    },
+
+    changeOption(state, payload) {
+      const {option, value} = payload
+
+      state.options[option] = value
+      localStorage.setItem('localOptions', JSON.stringify(state.options))
     }
   },
   actions: {
@@ -134,6 +155,11 @@ export default createStore({
 
     filteredCountriesData(state) {
       return state.filteredCountriesData
+    },
+
+    // local storage
+    options(state) {
+      return state.options
     }
   }
 })

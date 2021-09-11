@@ -4,12 +4,6 @@
     </div>
 </template>
 
-<script>
-export default {
-
-}
-</script>
-
 <style lang="scss">
 .filter-select {
     &:not(:first-of-type) {

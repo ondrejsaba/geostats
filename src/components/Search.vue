@@ -3,6 +3,7 @@
         <input
             type="text"
             class="search mt-20"
+            :class="{ dark: options.darkMode }"
             placeholder="Search for countries"
             v-model="query"
         >
@@ -25,7 +26,8 @@ export default {
     },
     computed: {
         ...mapGetters([
-            'searchQuery'
+            'searchQuery',
+            'options'
         ]),
         query: {
             get() {
@@ -78,6 +80,19 @@ input[type=text].search {
 
         & + #search-icon {
             color: light(400);
+        }
+    }
+
+    &.dark {
+        background-color: lighten(dark(100), 5%);
+        border: 1px solid dark(300);
+
+        &:focus {
+            border: 1px solid light(200);
+
+            & + #search-icon {
+                color: light(200);
+            }
         }
     }
 }

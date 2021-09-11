@@ -3,6 +3,7 @@
         v-if="filteredCountriesData.length > 0"
         id="countries-list-section"
         class="center-section mt-20"
+        :class="{ dark: options.darkMode }"
     >
         <CountryCard
             v-for="country in filteredCountriesData"
@@ -44,7 +45,8 @@ export default {
             'filteredCountriesData',
             'pickedFilter',
             'searchMode',
-            'searchQuery'
+            'searchQuery',
+            'options'
         ])
     },
     mounted() {
@@ -69,6 +71,10 @@ export default {
     flex-wrap: wrap;
     border-top: 1px solid light(200);
     padding-top: 20px;
+
+    &.dark {
+        border-top: 1px solid dark(300);
+    }
 }
 
 section.no-cards {

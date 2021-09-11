@@ -1,5 +1,5 @@
 <template>
-    <nav>
+    <nav :class="{ dark: options.darkMode }">
         <div id="nav-container">
             <div class="btn borderless mt-10" @click="setMenuOpened">
                 <span class="material-icons">
@@ -34,7 +34,13 @@
                 v-else-if="['Compare', 'Statistics'].includes($route.name)"
                 :to="{ name: 'Home' }"
             >
-                <div class="btn light right m-text mt-10">
+                <div 
+                    class="btn right m-text mt-10"
+                    :class="{
+                        light: !options.darkMode,
+                        dark: options.darkMode
+                    }"
+                >
                     Back
 
                     <span class="material-icons">
@@ -58,7 +64,8 @@ export default {
     computed: {
         ...mapGetters([
             'menuOpened',
-            'comparisonList'
+            'comparisonList',
+            'options'
         ]),
         menuIcon() {
             return this.menuOpened ? 'close' : 'menu'
@@ -83,7 +90,7 @@ nav {
     
     #nav-container {
         display: block;
-        width: calc(70% - 80px);
+        width: calc(100% - 20px);
         margin: 0 auto;
 
         #title {
@@ -93,6 +100,17 @@ nav {
             font-size: 24px;
             font-weight: 600;
             color: dark(400);
+        }
+    }
+
+    &.dark {
+        background-color: dark(300);
+        border-bottom: dark(400);
+        
+        #nav-container {
+            #title, .btn {
+                color: light(100);
+            }
         }
     }
 }

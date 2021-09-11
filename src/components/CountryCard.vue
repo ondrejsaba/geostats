@@ -1,6 +1,7 @@
 <template>
     <div
         class="country-card"
+        :class="{ dark: options.darkMode }"
     >
         <h2>{{ countryInfo.name }}</h2>
 
@@ -21,7 +22,13 @@
                     }
                 }"
             >
-                <div class="btn light s-size s-text">
+                <div
+                    class="btn s-size s-text"
+                    :class="{
+                        light: !options.darkMode,
+                        dark: options.darkMode
+                    }"
+                >
                     Statistics
                     <span class="material-icons">
                         trending_up
@@ -71,7 +78,8 @@ export default {
             'pickedFilter',
             'searchMode',
             'searchQuery',
-            'comparisonList'
+            'comparisonList',
+            'options'
         ]),
         isBeingCompared() {
             return this.comparisonList.includes(this.countryInfo.name)
@@ -102,6 +110,11 @@ export default {
 
     &:not(:nth-child(3n+0)) {
         margin-right: 20px;
+    }
+
+    &.dark {
+        border: 1px solid dark(300);
+        background-color: dark(100);
     }
 }
 
