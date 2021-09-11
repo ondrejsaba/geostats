@@ -106,6 +106,7 @@ export default {
         text-align: center;
         line-height: 30px;
         font-size: 24px;
+        color: dark(100);
     }
 
     &:not(:nth-child(3n+0)) {
@@ -115,6 +116,10 @@ export default {
     &.dark {
         border: 1px solid dark(300);
         background-color: dark(100);
+
+        h2 {
+            color: light(100);
+        }
     }
 }
 
