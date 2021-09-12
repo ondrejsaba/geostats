@@ -18,7 +18,7 @@
                 :to="{
                     name: 'Statistics',
                     params: {
-                        country: countryInfo.name
+                        country: countryRoute
                     }
                 }"
             >
@@ -83,6 +83,9 @@ export default {
         ]),
         isBeingCompared() {
             return this.comparisonList.includes(this.countryInfo.name)
+        },
+        countryRoute() {
+            return this.countryInfo.name.replaceAll(' ', '_')
         }
     }
 }

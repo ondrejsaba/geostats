@@ -3,13 +3,26 @@
         <input
             type="text"
             class="search mt-20"
-            :class="{ dark: options.darkMode }"
+            :class="{
+                dark: options.darkMode
+            }"
             placeholder="Search for countries"
             v-model="query"
         >
 
         <span class="material-icons" id="search-icon">
             search
+        </span>
+
+        <span
+            class="material-icons"
+            :class="{
+                hide: !searchMode
+            }"
+            id="reset-icon"
+            @click="resetSearchQuery"
+        >
+            close
         </span>
     </section>
 </template>
@@ -22,10 +35,16 @@ export default {
         ...mapMutations([
             'setSearchMode',
             'setSearchQuery'
-        ])
+        ]),
+        resetSearchQuery() {
+            this.setSearchQuery({
+                query: ''
+            })
+        }
     },
     computed: {
         ...mapGetters([
+            'searchMode',
             'searchQuery',
             'options'
         ]),
@@ -34,7 +53,9 @@ export default {
                 return this.searchQuery
             },
             set(value) {
-                this.$store.commit('setSearchQuery', {query: value})
+                this.setSearchQuery({
+                    query: value
+                })
             }
         }
     }
@@ -48,13 +69,24 @@ export default {
     position: relative;
 }
 
-#search-icon {
+.searchbar-icon {
     position: absolute;
     z-index: 25;
     font-size: 22px;
     color: light(300);
+}
+
+#search-icon {
+    @extend .searchbar-icon;
     left: 50px;
     top: 10px;
+}
+
+#reset-icon {
+    @extend .searchbar-icon;
+    right: 50px;
+    top: 10px;
+    cursor: pointer;
 }
 
 input[type=text].search {
