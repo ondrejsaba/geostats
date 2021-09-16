@@ -7,6 +7,7 @@ export default createStore({
 
     // filters
     pickedFilter: 'world',
+    sortBy: 'Name',
 
     // search
     searchMode: false,
@@ -35,6 +36,11 @@ export default createStore({
 
       // reset shown cards
       state.shownCards = 0
+    },
+
+    setSortBy(state, payload) {
+      const {sort} = payload
+      state.sortBy = sort
     },
 
     // search
@@ -69,6 +75,7 @@ export default createStore({
     },
 
     setFilteredCountriesData(state) {
+      // area filter
       if (state.searchMode) {
         state.filteredCountriesData = state.countriesData.filter(country => {
           return country.name.toLowerCase().includes(state.searchQuery.toLowerCase())
@@ -89,6 +96,25 @@ export default createStore({
 
           return filterId == state.pickedFilter || state.pickedFilter == 'world'
         })
+      }
+
+      // sort
+      switch(state.sortBy) {
+        case 'Name':
+          state.filteredCountriesData = state.filteredCountriesData.sort((a, b) => {
+            return a.name.localeCompare(b.name)
+          })
+          break
+        case 'Population':
+          state.filteredCountriesData = state.filteredCountriesData.sort((a, b) => {
+            return a.population < b.population ? 1 : -1
+          })
+          break
+        case 'Area':
+          state.filteredCountriesData = state.filteredCountriesData.sort((a, b) => {
+            return a.area < b.area ? 1 : -1
+          })
+          break
       }
     },
 
@@ -132,6 +158,10 @@ export default createStore({
     // filters
     pickedFilter(state) {
       return state.pickedFilter
+    },
+
+    sortBy(state) {
+      return state.sortBy
     },
 
     // search

@@ -21,7 +21,31 @@
                 {{ statIcons[statName] }}
             </span>
 
-            <span class="bold pr-10">{{ statName }}:</span> {{ statValue }}
+            <span class="bold pr-10">{{ statName }}:</span>
+            
+            {{ statValue }}
+        </p>
+
+        <p>
+            <span class="material-icons">
+                flag
+            </span>
+
+            <span class="bold pr-10">Neighboring countries:</span>
+
+            <span v-if="neighborFlags.length > 0">
+                <img
+                    v-for="neighbor in neighborFlags"
+                    class="countryIcon smaller"
+                    :src="neighbor.flag"
+                    :key="neighbor.name"
+                    :alt="neighbor.name"
+                >
+            </span>
+
+            <span v-else>
+                none
+            </span>
         </p>
     </section>
 </template>
@@ -39,13 +63,14 @@ export default {
                 'Capital': 'home',
                 'Population': 'sentiment_satisfied',
                 'Area': 'layers',
+                'Population density': 'groups',
                 'Timezones': 'schedule',
-                'Currency': 'payments',
-                'Neighboring countries': 'flag'
+                'Currency': 'payments'
             }
         }
     },
     methods: {
+        // saves the stats after getting data from the api
         getStats() {
             const {
                 region,
@@ -57,8 +82,7 @@ export default {
                 currencies: [{
                     code,
                     name
-                }],
-                borders
+                }]
             } = this.countryInfo
 
             this.displayedStats = {
@@ -67,9 +91,9 @@ export default {
                 'Capital': capital,
                 'Population': population,
                 'Area': `${area} km2`,
-                'Timezones': timezones,
-                'Currency': `${name} (${code})`,
-                'Neighboring countries': borders
+                'Population density': `${(population / area).toFixed(2)}/km2`,
+                'Timezones': timezones.length > 1 ? timezones.join(', ') : timezones.join(''),
+                'Currency': `${name} (${code})`
             }
         }
     },
@@ -78,14 +102,38 @@ export default {
             'countriesData',
             'options'
         ]),
+
+        // gets the name of the country based on the route
         countryName() {
             return this.$route.params.country.replaceAll('_', ' ')
         },
+
+        // is the countriesData variable filled with data from the rest countries API?
         countryInfoLoaded() {
             return this.countriesData.length > 0
         },
+
+        /* filters out the countriesData variable and returns only
+        info about the current country (based on the route) */
         countryInfo() {
             return this.countriesData.filter(country => country.name == this.countryName)[0]
+        },
+
+        neighborFlags() {
+            const neighborObjects = this.countryInfo.borders.map(countryCode => {
+                return this.countriesData.filter(country => {
+                    return country.alpha3Code == countryCode
+                })
+            }).map(country => country[0])
+
+            const neighborFlags = neighborObjects.map(country => {
+                return {
+                    name: country.name,
+                    flag: country.flag
+                }
+            })
+
+            return neighborFlags
         }
     },
     watch: {
@@ -113,7 +161,7 @@ section.stats-box {
     position: absolute;
     top: calc(50% + 60px);
     left: 50%;
-    max-width: calc(100% - 80px);
+    max-width: calc(70% - 80px);
     width: fit-content;
     height: fit-content;
     transform: translateX(-50%) translateY(calc(-50% - 60px));
@@ -122,10 +170,14 @@ section.stats-box {
     h2 {
         font-size: 32px;
         line-height: 32px;
+    }
 
-        .countryIcon {
-            height: 24px;
-            padding-right: 10px;
+    .countryIcon {
+        height: 24px;
+        padding-right: 10px;
+
+        &.smaller {
+            height: 18px;
         }
     }
 

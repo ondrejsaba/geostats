@@ -3,15 +3,24 @@
         class="country-card"
         :class="{ dark: options.darkMode }"
     >
-        <h2>{{ countryInfo.name }}</h2>
-
-        <div
-            class="card-flag"
-            :style="{
-                backgroundImage: 'url(' + countryInfo.flag + ')'
+        <router-link
+            :to="{
+                name: 'Statistics',
+                params: {
+                    country: countryRoute
+                }
             }"
         >
-        </div>
+            <h2>{{ countryInfo.name }}</h2>
+
+            <div
+                class="card-flag"
+                :style="{
+                    backgroundImage: 'url(' + countryInfo.flag + ')'
+                }"
+            >
+            </div>
+        </router-link>
 
         <div class="btns-wrapper">
             <router-link
@@ -123,6 +132,10 @@ export default {
         h2 {
             color: light(100);
         }
+
+        .card-flag {
+            border: none;
+        }
     }
 }
 
@@ -134,6 +147,7 @@ export default {
     background-repeat: no-repeat;
     background-position: center center;
     margin: 0 auto 80px;
+    border: 1px solid light(200);
 }
 
 .btns-wrapper {
