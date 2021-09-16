@@ -86,4 +86,6 @@ section.no-cards {
         font-size: 24px;
     }
 }
+
+@import "../sass/_mediaqueries.scss";
 </style>

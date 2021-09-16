@@ -14,6 +14,15 @@
         >
             {{ filter.name.en }}
         </FilterSelect>
+        
+        <SelectList
+            id="filter-select-list"
+            v-model="pickedFilter"
+            :select-options="filterSelectListOptions"
+            :options-mod="countryIdToName"
+            :static-width="'170px'"
+            :label="'Region:'"
+        />
     </section>
 
     <section id="sort-section" class="center-section mt-20">
@@ -44,26 +53,38 @@ export default {
     data() {
         return {
             filters: FiltersData,
-            sortOptions: ['Population', 'Area', 'Name']
+            sortOptions: ['Population', 'Area', 'Name'],
+            filterSelectListOptions: [...Object.keys(FiltersData)]
         }
     },
     methods: {
         ...mapMutations([
             'setPickedFilter',
-            'setFilteredCountriesData'
-        ])
+            'setFilteredCountriesData',
+            'setSortBy'
+        ]),
+        countryIdToName(id) {
+            return FiltersData[id].name.en
+        }
     },
     computed: {
         ...mapState([
-            'pickedFilter',
             'options'
         ]),
+        pickedFilter: {
+            get() {
+                return this.$store.state.pickedFilter
+            },
+            set(value) {
+                this.setPickedFilter({id: value})
+            }
+        },
         sortBy: {
             get() {
                 return this.$store.state.sortBy
             },
             set(value) {
-                this.$store.commit('setSortBy', {sort: value})
+                this.setSortBy({sort: value})
                 this.setFilteredCountriesData()
             }
         }
@@ -76,5 +97,9 @@ export default {
 
 section#filters-section, section#sort-section {
     width: fit-content;
+}
+
+#filter-select-list {
+    display: none;
 }
 </style>

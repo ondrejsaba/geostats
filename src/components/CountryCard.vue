@@ -11,7 +11,14 @@
                 }
             }"
         >
-            <h2>{{ countryInfo.name }}</h2>
+            <h2>
+                <img
+                    class="inline-flag"
+                    :src="countryInfo.flag"
+                >
+
+                {{ countryInfo.name }}
+            </h2>
 
             <div
                 class="card-flag"
@@ -31,9 +38,11 @@
                     }
                 }"
             >
-                <Button class="s-size s-text">
+                <Button class="statistics-btn s-size s-text">
                     <template v-slot:text>
-                        Statistics
+                        <span class="text">
+                            Statistics
+                        </span>
                         
                         <span class="material-icons">
                             trending_up
@@ -43,7 +52,7 @@
             </router-link>
 
             <Button
-                class="s-size s-text ml-10"
+                class="comparison-add-btn s-size s-text ml-10"
                 :class="{
                     primary: !isBeingCompared,
                     red: isBeingCompared
@@ -52,11 +61,11 @@
                 @click="modifyComparisonList"
             >
                 <template v-slot:text>
-                    <span v-if="!isBeingCompared">
+                    <span v-if="!isBeingCompared" class="text">
                         Add to comparison
                     </span>
 
-                    <span v-else>
+                    <span v-else class="text">
                         Remove
                     </span>
 
@@ -124,6 +133,12 @@ export default {
         line-height: 30px;
         font-size: 24px;
         color: dark(100);
+
+        .inline-flag {
+            display: none;
+            height: 18px;
+            padding-right: 10px;
+        }
     }
 
     &:not(:nth-child(3n+0)) {
@@ -162,4 +177,6 @@ export default {
     width: fit-content;
     transform: translateX(-50%);
 }
+
+@import "../sass/_mediaqueries.scss";
 </style>

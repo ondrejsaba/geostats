@@ -3,3 +3,68 @@
         width: 100%;
     }
 }
+
+@media only screen and (max-width: 1150px) {
+    #countries-list-section {
+        display: block;
+        flex-wrap: nowrap;
+    }
+
+    .country-card {
+        min-height: 0px;
+        overflow: hidden;
+        width: 100%;
+
+        h2 {
+            text-align: left;
+            float: left;
+            padding: 20px;
+            width: calc(100% - 410px);
+
+            .inline-flag {
+                display: inline-block;
+            }
+        }
+    }
+
+    .card-flag {
+        display: none;
+    }
+
+    .btns-wrapper {
+        position: relative;
+        float: right;
+        left: 0;
+        bottom: 0;
+        transform: none;
+        margin: 20px 20px;
+    }
+}
+
+// filters -> filter select list
+@media only screen and (max-width: 860px) {
+    .filter-select {
+        display: none;
+    }
+
+    #filter-select-list {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .country-card {
+        h2 {
+            width: calc(100% - 180px);
+        }
+    }
+
+    .statistics-btn, .comparison-add-btn {
+        padding: 0;
+        width: 40px;
+
+        .text {
+            display: none;
+        }
+    } 
+}

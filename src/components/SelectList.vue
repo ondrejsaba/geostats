@@ -22,7 +22,7 @@
             }"
             @click="rollOpened = !rollOpened"
         >
-            {{ modelValue }}
+            {{ optionsMod !== undefined ? optionsMod(modelValue) : modelValue }}
 
             <span
                 class="material-icons"
@@ -43,7 +43,7 @@
                     class="roll-option"
                     @click="$emit('update:modelValue', option)"
                 >
-                    {{ option }}
+                    {{ optionsMod !== undefined ? optionsMod(option) : option }}
                 </div>
             </div>
         </div>
@@ -56,6 +56,12 @@ import { mapState } from 'vuex'
 export default {
     props: {
         'select-options': Array,
+
+        /* Changes the way an option is displayed,
+        accepts a function with a value parameter
+        that returns a modified version of the
+        value */
+        'options-mod': Function,
         'static-width': String,
         'label': String,
 

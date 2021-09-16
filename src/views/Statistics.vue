@@ -6,7 +6,7 @@
     >
         <h2 id="countryNameText">
             <img
-                class="countryIcon"
+                class="country-icon"
                 :src="countryInfo.flag"
                 :alt="countryName"
             >
@@ -36,7 +36,7 @@
             <span v-if="neighborFlags.length > 0">
                 <img
                     v-for="neighbor in neighborFlags"
-                    class="countryIcon smaller"
+                    class="country-icon smaller"
                     :src="neighbor.flag"
                     :key="neighbor.name"
                     :alt="neighbor.name"
@@ -172,7 +172,7 @@ section.stats-box {
         line-height: 32px;
     }
 
-    .countryIcon {
+    .country-icon {
         height: 24px;
         padding-right: 10px;
 
