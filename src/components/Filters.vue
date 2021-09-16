@@ -23,24 +23,28 @@
             :static-width="'120px'"
             :label="'Sort by:'"
         />
+
+        <SortDirection />
     </section>
 </template>
 
 <script>
 import FilterSelect from './FilterSelect.vue'
 import SelectList from './SelectList.vue'
+import SortDirection from './SortDirection.vue'
 import FiltersData from '../json/filters.json'
-import { mapMutations, mapGetters } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 
 export default {
     components: {
         FilterSelect,
-        SelectList
+        SelectList,
+        SortDirection
     },
     data() {
         return {
             filters: FiltersData,
-            sortOptions: ['Name', 'Population', 'Area']
+            sortOptions: ['Population', 'Area', 'Name']
         }
     },
     methods: {
@@ -50,7 +54,7 @@ export default {
         ])
     },
     computed: {
-        ...mapGetters([
+        ...mapState([
             'pickedFilter',
             'options'
         ]),

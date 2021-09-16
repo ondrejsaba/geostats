@@ -34,35 +34,35 @@
                 v-else-if="['Compare', 'Statistics'].includes($route.name)"
                 :to="{ name: 'Home' }"
             >
-                <div 
-                    class="btn right m-text mt-10"
-                    :class="{
-                        light: !options.darkMode,
-                        dark: options.darkMode
-                    }"
-                >
-                    Back
+                <Button class="right m-text mt-10">
+                    <template v-slot:text>
+                        Back
 
-                    <span class="material-icons">
-                        arrow_forward
-                    </span>
-                </div>
+                        <span class="material-icons">
+                            arrow_forward
+                        </span>
+                    </template>
+                </Button>
             </router-link>
         </div>
     </nav>
 </template>
 
 <script>
-import { mapMutations, mapGetters } from 'vuex'
+import Button from './Button.vue'
+import { mapMutations, mapState } from 'vuex'
 
 export default {
+    components: {
+        Button
+    },
     methods: {
         ...mapMutations([
             'setMenuOpened'
         ])
     },
     computed: {
-        ...mapGetters([
+        ...mapState([
             'menuOpened',
             'comparisonList',
             'options'

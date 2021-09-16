@@ -23,7 +23,7 @@
 import Navbar from './components/Navbar.vue'
 import DarkenBox from './components/DarkenBox.vue'
 import SideMenu from './components/SideMenu.vue'
-import { mapMutations, mapGetters } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 
 export default {
   components: {
@@ -42,7 +42,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
+    ...mapState([
       'menuOpened',
       'options'
     ]),
@@ -60,6 +60,7 @@ export default {
 @import "./sass/_variables.scss";
 @import "./sass/_classes.scss";
 @import "./sass/_transitions.scss";
+@import "./sass/_mediaqueries.scss";
 
 body {
   margin: 0;

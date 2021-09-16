@@ -1,44 +1,37 @@
 {
     "world": {
         "name": {
-            "en": "World",
-            "cz": "Celý svět"
+            "en": "World"
         }
     },
     "asia": {
         "name": {
-            "en": "Asia",
-            "cz": "Asie"
+            "en": "Asia"
         }
     },
     "africa": {
         "name": {
-            "en": "Africa",
-            "cz": "Afrika"
+            "en": "Africa"
         }
     },
     "europe": {
         "name": {
-            "en": "Europe",
-            "cz": "Evropa"
+            "en": "Europe"
         }
     },
     "north_america": {
         "name": {
-            "en": "North America",
-            "cz": "Severní Amerika"
+            "en": "North America"
         }
     },
     "south_america": {
         "name": {
-            "en": "South America",
-            "cz": "Jižní Amerika"
+            "en": "South America"
         }
     },
     "oceania": {
         "name": {
-            "en": "Oceania",
-            "cz": "Oceánie"
+            "en": "Oceania"
         }
     }
 }

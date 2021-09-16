@@ -29,7 +29,7 @@
 
 <script>
 import CountryCard from './CountryCard.vue'
-import { mapMutations, mapGetters } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 
 export default {
     components: {
@@ -41,7 +41,7 @@ export default {
         ])
     },
     computed: {
-        ...mapGetters([
+        ...mapState([
             'filteredCountriesData',
             'pickedFilter',
             'searchMode',

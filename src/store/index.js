@@ -7,7 +7,8 @@ export default createStore({
 
     // filters
     pickedFilter: 'world',
-    sortBy: 'Name',
+    sortBy: 'Population',
+    sortDirection: 'descend',
 
     // search
     searchMode: false,
@@ -41,6 +42,19 @@ export default createStore({
     setSortBy(state, payload) {
       const {sort} = payload
       state.sortBy = sort
+    },
+
+    setSortDirection(state) {
+      // data for the button
+      const switchDirection = {
+        'ascend': 'descend',
+        'descend': 'ascend'
+      }
+
+      state.sortDirection = switchDirection[state.sortDirection]
+
+      // actually reverse the order
+      state.filteredCountriesData = state.filteredCountriesData.reverse()
     },
 
     // search
@@ -99,22 +113,19 @@ export default createStore({
       }
 
       // sort
-      switch(state.sortBy) {
-        case 'Name':
-          state.filteredCountriesData = state.filteredCountriesData.sort((a, b) => {
-            return a.name.localeCompare(b.name)
-          })
-          break
-        case 'Population':
-          state.filteredCountriesData = state.filteredCountriesData.sort((a, b) => {
-            return a.population < b.population ? 1 : -1
-          })
-          break
-        case 'Area':
-          state.filteredCountriesData = state.filteredCountriesData.sort((a, b) => {
-            return a.area < b.area ? 1 : -1
-          })
-          break
+      state.filteredCountriesData = state.filteredCountriesData.sort((a, b) => {
+        const sortingComparators = {
+          'Name': a.name.localeCompare(b.name),
+          'Population': a.population < b.population ? 1 : -1,
+          'Area': a.area < b.area ? 1 : -1
+        }
+
+        return sortingComparators[state.sortBy]
+      })
+
+      // order (keep it)
+      if (state.sortDirection == 'ascend') {
+        state.filteredCountriesData = state.filteredCountriesData.reverse()
       }
     },
 
@@ -147,49 +158,6 @@ export default createStore({
           context.commit('setCountriesData', {data: data})
           context.commit('setFilteredCountriesData')
         })
-    }
-  },
-  getters: {
-    // menu
-    menuOpened(state) {
-      return state.menuOpened
-    },
-
-    // filters
-    pickedFilter(state) {
-      return state.pickedFilter
-    },
-
-    sortBy(state) {
-      return state.sortBy
-    },
-
-    // search
-    searchMode(state) {
-      return state.searchMode
-    },
-
-    searchQuery(state) {
-      return state.searchQuery
-    },
-
-    // comparison list
-    comparisonList(state) {
-      return state.comparisonList
-    },
-
-    // countries data
-    countriesData(state) {
-      return state.countriesData
-    },
-
-    filteredCountriesData(state) {
-      return state.filteredCountriesData
-    },
-
-    // local storage
-    options(state) {
-      return state.options
     }
   }
 })

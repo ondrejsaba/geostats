@@ -9,7 +9,7 @@
 
 #darken-box {
     position: fixed;
-    z-index: 50;
+    z-index: 200;
     width: 100%;
     height: calc(100vh - 60px);
     left: 0;

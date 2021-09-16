@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { mapMutations, mapGetters } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 
 export default {
     methods: {
@@ -26,7 +26,7 @@ export default {
         ])
     },
     computed: {
-        ...mapGetters([
+        ...mapState([
             'options'
         ]),
         colorModeIcon() {
@@ -41,7 +41,7 @@ export default {
 
 #side-menu {
     position: fixed;
-    z-index: 75;
+    z-index: 250;
     width: 350px;
     height: calc(100% - 60px);
     top: 60px;

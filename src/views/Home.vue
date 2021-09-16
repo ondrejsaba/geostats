@@ -12,7 +12,7 @@
 import Search from '../components/Search.vue'
 import Filters from '../components/Filters.vue'
 import CountriesList from '../components/CountriesList.vue'
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Home',
@@ -22,7 +22,7 @@ export default {
     CountriesList
   },
   computed: {
-    ...mapGetters([
+    ...mapState([
       'searchMode'
     ])
   }

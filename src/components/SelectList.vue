@@ -27,7 +27,7 @@
             <span
                 class="material-icons"
                 :class="{
-                    'rotate180': rollOpened
+                    'rotate180': !rollOpened
                 }"
             >
                 arrow_drop_down
@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
     props: {
@@ -68,7 +68,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters([
+        ...mapState([
             'options'
         ]),
         rollOptions() {
@@ -87,11 +87,15 @@ export default {
     }
 }
 
-span.label {
-    padding-right: 10px;
+.select-list {
+    display: inline-block;
 
-    &.light-text {
-        color: light(100);
+    span.label {
+        padding-right: 10px;
+
+        &.light-text {
+            color: light(100);
+        }
     }
 }
 </style>

@@ -31,50 +31,55 @@
                     }
                 }"
             >
-                <div
-                    class="btn s-size s-text"
-                    :class="{
-                        light: !options.darkMode,
-                        dark: options.darkMode
-                    }"
-                >
-                    Statistics
-                    <span class="material-icons">
-                        trending_up
-                    </span>
-                </div>
+                <Button class="s-size s-text">
+                    <template v-slot:text>
+                        Statistics
+                        
+                        <span class="material-icons">
+                            trending_up
+                        </span>
+                    </template>
+                </Button>
             </router-link>
 
-            <div
-                class="btn s-size s-text ml-10"
+            <Button
+                class="s-size s-text ml-10"
                 :class="{
                     primary: !isBeingCompared,
                     red: isBeingCompared
                 }"
+                :ignoreColorMode="true"
                 @click="modifyComparisonList"
             >
-                <span v-if="!isBeingCompared">
-                    Add to comparison
-                </span>
-                <span v-else>
-                    Remove
-                </span>
+                <template v-slot:text>
+                    <span v-if="!isBeingCompared">
+                        Add to comparison
+                    </span>
 
-                <span class="material-icons">
-                    {{ isBeingCompared ? 'remove' : 'add' }}
-                </span>
-            </div>
+                    <span v-else>
+                        Remove
+                    </span>
+
+                    <span class="material-icons">
+                        {{ isBeingCompared ? 'remove' : 'add' }}
+                    </span>
+                </template>
+            </Button>
         </div>
     </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import Button from './Button.vue'
+import { mapState } from 'vuex'
 
 export default {
-    props: [
-        'countryInfo'
-    ],
+    components: {
+        Button
+    },
+    props: {
+        countryInfo: Object
+    },
     methods: {
         modifyComparisonList() {
             this.$store.commit('modifyComparisonList', {
@@ -83,7 +88,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters([
+        ...mapState([
             'pickedFilter',
             'searchMode',
             'searchQuery',

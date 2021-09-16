@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { mapMutations, mapGetters } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 
 export default {
     methods: {
@@ -43,7 +43,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters([
+        ...mapState([
             'searchMode',
             'searchQuery',
             'options'
