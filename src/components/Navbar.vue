@@ -79,7 +79,7 @@ export default {
 
 nav {
     position: fixed;
-    z-index: 100;
+    z-index: 300;
     margin: 0;
     width: 100%;
     height: 60px;

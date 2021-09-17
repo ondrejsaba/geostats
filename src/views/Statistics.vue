@@ -194,4 +194,6 @@ section.stats-box {
         color: light(100);
     }
 }
+
+@import "../sass/_mediaqueries.scss";
 </style>

@@ -8,6 +8,8 @@
     #countries-list-section {
         display: block;
         flex-wrap: nowrap;
+
+        padding-bottom: 10px;
     }
 
     .country-card {
@@ -66,5 +68,40 @@
         .text {
             display: none;
         }
-    } 
+    }
+
+    // stats view
+    section.stats-box {
+        position: relative;
+        max-width: 100%;
+        width: calc(100% - 40px);
+        padding: 80px 20px 20px 20px;
+        left: 0;
+        top: 0;
+        transform: none;
+    }
+}
+
+@media only screen and (max-height: 700px) {
+    // stats view
+    section.stats-box {
+        position: relative;
+        max-width: 100%;
+        width: calc(100% - 40px);
+        padding: 80px 20px 20px 20px;
+        left: 0;
+        top: 0;
+        transform: none;
+    }
+}
+
+// side menu
+@media only screen and (max-width: 700px) {
+    #side-menu {
+        width: 300px;
+    }
+
+    .menu-slide-enter-from, .menu-slide-leave-to {
+        left: -300px;
+    }
 }
