@@ -69,6 +69,11 @@
                     display: none;
                 }
             }
+
+            .stat-inside {
+                font-size: 12px;
+                top: -20px;
+            }
         }
     }
 }
@@ -126,19 +131,6 @@
     }
 }
 
-@media only screen and (max-height: 700px) {
-    // stats view
-    section.stats-box {
-        position: relative;
-        max-width: 100%;
-        width: calc(100% - 40px);
-        padding: 80px 20px 20px 20px;
-        left: 0;
-        top: 0;
-        transform: none;
-    }
-}
-
 @media only screen and (max-width: 700px) {
     // side menu
 
@@ -149,9 +141,27 @@
     .menu-slide-enter-from, .menu-slide-leave-to {
         left: -300px;
     }
+
+    // stats view
+    section.stats-box {
+        position: relative;
+        max-width: 100%;
+        width: calc(100% - 40px);
+        padding: 80px 20px 20px 20px;
+        left: 0;
+        top: 0;
+        transform: none;
+    }
+
+    // hints
+    .hint {
+        display: none !important;
+    }
 }
 
 @media only screen and (max-width: 620px) {
+    // chart
+
     #chart-form {
         .select-list {
             display: block;

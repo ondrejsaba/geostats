@@ -23,7 +23,7 @@
             >
                 <template v-slot:text>
                     <span id="chart-reset-btn-text">
-                        Remove all countries
+                        Remove a country
                     </span>
 
                     <span class="material-icons">

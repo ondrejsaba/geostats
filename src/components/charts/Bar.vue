@@ -37,7 +37,7 @@
                     </span>
                 </div>
 
-                <div class="hint">
+                <div class="stat-inside">
                     {{ convertLongNumber(bar.value) }}
                 </div>
             </div>
@@ -229,9 +229,15 @@ export default {
             }
         }
 
-        &:hover .hint {
-            display: block;
-            top: -40px;
+        .stat-inside {
+            position: absolute;
+            width: fit-content;
+            left: 50%;
+            top: -30px;
+            transform: translateX(-50%);
+            font-size: 18px;
+            font-weight: 300;
+            color: light(100);
         }
 
         &:active {
