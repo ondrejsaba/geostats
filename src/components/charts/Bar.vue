@@ -24,6 +24,7 @@
                     height: `${100 / (graphMax / bar.value)}%`,
                     backgroundColor: barColors[index]
                 }"
+                @click="statsLink(bar.label)"
             >
                 <div class="desc">
                     <img
@@ -117,6 +118,16 @@ export default {
             n += convertParams.suffix
 
             return n
+        },
+        statsLink(name) {
+            const countryId = name.replaceAll(' ', '_')
+
+            this.$router.push({
+                name: 'Statistics',
+                params: {
+                    country: countryId
+                }
+            })
         }
     },
     computed: {
@@ -211,6 +222,10 @@ export default {
         &:hover .hint {
             display: block;
             top: -40px;
+        }
+
+        &:active {
+            cursor: default;
         }
     }
 }

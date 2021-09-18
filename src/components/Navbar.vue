@@ -37,20 +37,19 @@
                 </template>
             </Button>
 
-            <router-link
-                v-else-if="$route.name != 'Home'"
-                :to="{ name: 'Home' }"
+            <Button
+                v-if="$route.name != 'Home'"
+                class="right m-text mt-10"
+                @click="goBack"
             >
-                <Button class="right m-text mt-10">
-                    <template v-slot:text>
-                        Back
+                <template v-slot:text>
+                    Back
 
-                        <span class="material-icons">
-                            arrow_forward
-                        </span>
-                    </template>
-                </Button>
-            </router-link>
+                    <span class="material-icons">
+                        arrow_forward
+                    </span>
+                </template>
+            </Button>
         </div>
     </nav>
 </template>
@@ -71,6 +70,9 @@ export default {
             if (this.comparisonList.length >= 2 && this.$route.name == 'Home') {
                 this.$router.push({ name: 'Compare' })
             }
+        },
+        goBack() {
+            window.history.length ? this.$router.go(-1) : this.$router.push({ name: 'Home' })
         }
     },
     computed: {
