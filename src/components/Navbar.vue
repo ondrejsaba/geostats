@@ -14,7 +14,7 @@
             </router-link>
 
             <router-link
-                v-if="comparisonList.length && $route.name != 'Compare'"
+                v-if="comparisonList.length && $route.name == 'Home'"
                 :to="{ name: 'Compare' }"
             >
                 <div class="btn primary right m-text mt-10">
@@ -23,15 +23,11 @@
                     <span class="material-icons">
                         bar_chart
                     </span>
-
-                    <div class="hint hint-bottom" v-if="!comparisonList.length">
-                        There are no countries in your comparison list.
-                    </div>
                 </div>
             </router-link>
 
             <router-link
-                v-else-if="['Compare', 'Statistics'].includes($route.name)"
+                v-else-if="$route.name != 'Home'"
                 :to="{ name: 'Home' }"
             >
                 <Button class="right m-text mt-10">

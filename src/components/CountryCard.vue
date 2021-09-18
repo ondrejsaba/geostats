@@ -54,7 +54,8 @@
             <Button
                 class="comparison-add-btn s-size s-text ml-10"
                 :class="{
-                    primary: !isBeingCompared,
+                    primary: !isBeingCompared && comparisonList.length < 6,
+                    inactive: !isBeingCompared && comparisonList.length >= 6,
                     red: isBeingCompared
                 }"
                 :ignoreColorMode="true"
@@ -72,6 +73,10 @@
                     <span class="material-icons">
                         {{ isBeingCompared ? 'remove' : 'add' }}
                     </span>
+                </template>
+
+                <template v-if="!isBeingCompared && comparisonList.length >= 6" v-slot:hint>
+                    Too many countries.
                 </template>
             </Button>
         </div>
@@ -91,9 +96,11 @@ export default {
     },
     methods: {
         modifyComparisonList() {
-            this.$store.commit('modifyComparisonList', {
-                countryName: this.countryInfo.name
-            })
+            if (this.comparisonList.length < 6 || this.comparisonList.includes(this.countryInfo.name)) {
+                this.$store.commit('modifyComparisonList', {
+                    countryName: this.countryInfo.name
+                })
+            }
         }
     },
     computed: {

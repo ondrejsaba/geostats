@@ -103,6 +103,12 @@
         }
     }
 
+    &.inactive {
+        border: 1px solid darken(light(500), 20%);
+        background-color: darken(light(500), 10%);
+        color: light(300);
+    }
+
     // text modifiers
     &.s-text {
         font-size: 16px;
