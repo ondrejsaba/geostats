@@ -26,7 +26,16 @@
                 }"
             >
                 <div class="desc">
+                    <img
+                        :src="getCountryFlag(bar.label)"
+                        class="label-flag"
+                    >
+
                     {{ bar.label }}
+                </div>
+
+                <div class="hint">
+                    {{ convertLongNumber(bar.value) }}
                 </div>
             </div>
         </div>
@@ -49,6 +58,12 @@ export default {
         }
     },
     methods: {
+        getCountryFlag(name) {
+            const data = this.countriesData.filter(country => country.name == name)[0]
+            const {flag} = data
+
+            return flag
+        },
         getCountryData(name) {
             const data = this.countriesData.filter(country => country.name == name)[0]
             const {population, area} = data
@@ -169,9 +184,9 @@ export default {
     display: flex;
     align-items: flex-end;
     gap: 50px;
-    width: calc(100% - 170px);
+    width: calc(100% - 200px);
     height: calc(100% - 200px);
-    left: 120px;
+    left: 150px;
     top: 100px;
 
     .bar {
@@ -179,12 +194,23 @@ export default {
         flex-grow: 1;
         box-sizing: border-box;
         text-align: center;
+        cursor: pointer;
 
         .desc {
             position: absolute;
             width: 100%;
             height: 20px;
             bottom: -30px;
+
+            .label-flag {
+                height: 14px;
+                padding-right: 5px;
+            }
+        }
+
+        &:hover .hint {
+            display: block;
+            top: -40px;
         }
     }
 }

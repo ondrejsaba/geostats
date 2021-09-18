@@ -13,18 +13,29 @@
                 </div>
             </router-link>
 
-            <router-link
+            <Button
                 v-if="comparisonList.length && $route.name == 'Home'"
-                :to="{ name: 'Compare' }"
+                class="right m-text mt-10"
+                :class="{
+                    primary: comparisonList.length >= 2,
+                    dark: comparisonList.length == 1 && options.darkMode,
+                    light: comparisonList.length == 1 && !options.darkMode
+                }"
+                :ignoreColorMode="true"
+                @click="compare"
             >
-                <div class="btn primary right m-text mt-10">
+                <template v-slot:text>
                     Compare countries ({{ comparisonList.length }})
 
                     <span class="material-icons">
                         bar_chart
                     </span>
-                </div>
-            </router-link>
+                </template>
+
+                <template v-if="comparisonList.length == 1" v-slot:hint>
+                    Add one more country to compare.
+                </template>
+            </Button>
 
             <router-link
                 v-else-if="$route.name != 'Home'"
@@ -55,7 +66,12 @@ export default {
     methods: {
         ...mapMutations([
             'setMenuOpened'
-        ])
+        ]),
+        compare() {
+            if (this.comparisonList.length >= 2 && this.$route.name == 'Home') {
+                this.$router.push({ name: 'Compare' })
+            }
+        }
     },
     computed: {
         ...mapState([
