@@ -32,7 +32,9 @@
                         class="label-flag"
                     >
 
-                    {{ bar.label }}
+                    <span class="label">
+                        {{ getShortenedName(bar.label) }}
+                    </span>
                 </div>
 
                 <div class="hint">
@@ -128,6 +130,9 @@ export default {
                     country: countryId
                 }
             })
+        },
+        getShortenedName(name) {
+            return name.length > 14 ? name.substring(0, 14) + "..." : name
         }
     },
     computed: {
@@ -167,9 +172,9 @@ export default {
 #x-axis {
     position: relative;
     width: calc(100% - 200px);
-    height: calc(100% - 200px);
+    height: calc(100% - 160px);
     padding-left: 100px;
-    margin: 100px auto;
+    margin: calc(100px - 20px) auto;
 
     .line {
         position: absolute;
@@ -196,9 +201,9 @@ export default {
     align-items: flex-end;
     gap: 50px;
     width: calc(100% - 200px);
-    height: calc(100% - 200px);
+    height: calc(100% - 160px);
     left: 150px;
-    top: 100px;
+    top: calc(100px - 20px);
 
     .bar {
         position: relative;
@@ -206,6 +211,8 @@ export default {
         box-sizing: border-box;
         text-align: center;
         cursor: pointer;
+
+        transition: height 0.2s ease;
 
         .desc {
             position: absolute;
@@ -215,7 +222,10 @@ export default {
 
             .label-flag {
                 height: 14px;
-                padding-right: 5px;
+            }
+
+            .label {
+                padding-left: 10px;
             }
         }
 

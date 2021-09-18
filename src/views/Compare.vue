@@ -1,9 +1,8 @@
 <template>
     <main class="content">
-        <div class="center mt-20 mb-20">
+        <div id="chart-form" class="mb-20">
             <SelectList
                 v-model="compare.selected"
-                class="mr-20"
                 :select-options="compare.list"
                 :label="'Compare:'"
                 :static-width="'190px'"
@@ -11,10 +10,27 @@
 
             <SelectList
                 v-model="chartType.selected"
+                class="pl-20"
                 :select-options="chartType.list"
                 :label="'Chart type:'"
                 :static-width="'80px'"
             />
+
+            <Button
+                id="chart-reset-btn"
+                class="red s-size s-text right"
+                :ignoreColorMode="true"
+            >
+                <template v-slot:text>
+                    <span id="chart-reset-btn-text">
+                        Remove all countries
+                    </span>
+
+                    <span class="material-icons">
+                        delete
+                    </span>
+                </template>
+            </Button>
         </div>
 
         <component
@@ -29,15 +45,19 @@
 
 <script>
 import SelectList from '@/components/SelectList.vue'
+import Button from '@/components/Button.vue'
 import Bar from '@/components/charts/Bar.vue'
 import Pie from '@/components/charts/Pie.vue'
+import Table from '@/components/charts/Table.vue'
 import { mapState } from 'vuex'
 
 export default {
     components: {
         SelectList,
+        Button,
         Bar,
-        Pie
+        Pie,
+        Table
     },
     data() {
         return {
@@ -46,7 +66,7 @@ export default {
                 selected: 'Population'
             },
             chartType: {
-                list: ['Bar', 'Pie'],
+                list: ['Bar', 'Pie', 'Table'],
                 selected: 'Bar'
             },
             chartData: {}
@@ -99,6 +119,11 @@ export default {
 
 <style lang="scss">
 @import "../sass/_variables.scss";
+
+#chart-form {
+    position: relative;
+    margin-top: 40px;
+}
 
 .chart {
     position: relative;

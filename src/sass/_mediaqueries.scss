@@ -2,6 +2,16 @@
     main.content {
         width: 100%;
     }
+
+    #chart-form {
+        padding: 0 20px 0 20px;
+        margin-top: 20px;
+    }
+
+    .chart {
+        height: calc(100vh - 130px - 2px);
+        border-radius: 0px;
+    }
 }
 
 @media only screen and (max-width: 1150px) {
@@ -43,8 +53,29 @@
     }
 }
 
-// filters -> filter select list
+@media only screen and (max-width: 900px) {
+    // comparison bar graph -> hide labels, keep flags
+
+    #y-axis {
+        gap: 10px;
+
+        .bar {
+            .desc {
+                .label-flag {
+                    height: 20px;
+                }
+
+                .label {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
 @media only screen and (max-width: 860px) {
+    // filters -> filter select list
+
     .filter-select {
         display: none;
     }
@@ -80,6 +111,19 @@
         top: 0;
         transform: none;
     }
+
+    // chart
+    #chart-form {
+        #chart-reset-btn {
+            position: absolute;
+            right: 20px;
+            top: 0;
+        }
+
+        #chart-reset-btn-text {
+            display: none;
+        }
+    }
 }
 
 @media only screen and (max-height: 700px) {
@@ -95,13 +139,53 @@
     }
 }
 
-// side menu
 @media only screen and (max-width: 700px) {
+    // side menu
+
     #side-menu {
         width: 300px;
     }
 
     .menu-slide-enter-from, .menu-slide-leave-to {
         left: -300px;
+    }
+}
+
+@media only screen and (max-width: 620px) {
+    #chart-form {
+        .select-list {
+            display: block;
+            margin-bottom: 10px;
+
+            &:not(:first-of-type) {
+                padding: 0 !important;
+            }
+
+            span.label {
+                display: block;
+                width: fit-content;
+                margin-bottom: 10px;
+            }
+        }
+    }
+
+    .chart {
+        height: calc(100vh - 230px - 4px);
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    // comparison bar graph -> scale down label flags
+
+    #y-axis {
+        gap: 5px;
+
+        .bar {
+            .desc {
+                .label-flag {
+                    height: 12px;
+                }
+            }
+        }
     }
 }
