@@ -105,8 +105,12 @@
 
     &.inactive {
         border: 1px solid darken(light(500), 20%);
-        background-color: darken(light(500), 10%);
+        background-color: rgba(darken(light(500), 10%), 0.5);
         color: light(300);
+
+        &:hover {
+            background-color: rgba(darken(light(500), 10%), 0.5);
+        }
     }
 
     // text modifiers

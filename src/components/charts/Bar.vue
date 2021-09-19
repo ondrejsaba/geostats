@@ -4,10 +4,13 @@
             <div
                 class="line"
                 v-for="(value, index) in xAxisValues"
+                :key="index"
                 :style="{
                     bottom: `${index*20}%`
                 }"
-                :key="index"
+                :class="{
+                    dark: options.darkMode
+                }"
             >
                 <div class="desc">
                     {{ value }}
@@ -22,7 +25,10 @@
                 :key="bar.label"
                 :style="{
                     height: `${100 / (graphMax / bar.value)}%`,
-                    backgroundColor: barColors[index]
+                    backgroundColor: graphColors[index]
+                }"
+                :class="{
+                    dark: options.darkMode
                 }"
                 @click="statsLink(bar.label)"
             >
@@ -46,102 +52,22 @@
 </template>
 
 <script>
+import chart from '@/mixins/chart.js'
 import { mapState } from 'vuex'
 
 export default {
-    props: {
-        data: Object,
-        type: String
-    },
+    mixins: [
+        chart
+    ],
     data() {
         return {
-            graphData: [],
-            lines: 6,
-            barColors: ['#006699', '#6E4673', '#649E0B', '#F6921E', '#D14343', '#00AFAF']
-        }
-    },
-    methods: {
-        getCountryFlag(name) {
-            const data = this.countriesData.filter(country => country.name == name)[0]
-            const {flag} = data
-
-            return flag
-        },
-        getCountryData(name) {
-            const data = this.countriesData.filter(country => country.name == name)[0]
-            const {population, area} = data
-
-            return {
-                'Population': population,
-                'Area': area,
-                'Population density': population / area
-            }
-        },
-        setGraphData() {
-            this.graphData = []
-
-            this.data.countries.forEach(country => {
-                this.graphData.push({
-                    label: country,
-                    value: this.getCountryData(country)[this.data.compare]
-                })
-            })
-        },
-        convertLongNumber(number) {
-            let n = number.toString()
-            let convertParams = {
-                divide: 1,
-                suffix: ''
-            }
-
-            if (n.length >= 10 && n.length <= 12) {
-                convertParams = {
-                    divide: 10**9,
-                    suffix: 'B'
-                }
-            } else if (n.length >= 7 && n.length <= 9) {
-                convertParams = {
-                    divide: 10**6,
-                    suffix: 'M'
-                }
-            } else if (n.length >= 4 && n.length <= 6) {
-                convertParams = {
-                    divide: 10**3,
-                    suffix: 'K'
-                }
-            }
-
-            n = (number / convertParams.divide).toString()
-
-            if (n.includes('.')) {
-                n = n.substring(0, n.indexOf('.') + 2)
-            }
-
-            n += convertParams.suffix
-
-            return n
-        },
-        statsLink(name) {
-            const countryId = name.replaceAll(' ', '_')
-
-            this.$router.push({
-                name: 'Statistics',
-                params: {
-                    country: countryId
-                }
-            })
-        },
-        getShortenedName(name) {
-            return name.length > 14 ? name.substring(0, 14) + "..." : name
+            lines: 6
         }
     },
     computed: {
         ...mapState([
-            'countriesData'
+            'options'
         ]),
-        graphMax() {
-           return Math.max(...this.graphData.map(bar => bar.value))
-        },
         xAxisValues() {
             let values = [...Array(this.lines - 1).keys()].map(value => value + 1).map(value => {
                 return this.graphMax * (value / (this.lines - 1))
@@ -151,17 +77,6 @@ export default {
 
             return values
         }
-    },
-    watch: {
-        data: {
-            handler: function() {
-                this.setGraphData()
-            },
-            deep: true
-        }
-    },
-    mounted() {
-        this.setGraphData()
     }
 }
 </script>
@@ -180,7 +95,11 @@ export default {
         position: absolute;
         width: calc(100% - 100px);
         height: 1px;
-        background-color: lighten(dark(100), 10%);
+        background-color: darken(light(200), 5%);
+
+        &.dark {
+            background-color: lighten(dark(100), 10%);
+        }
 
         .desc {
             position: absolute;
@@ -237,11 +156,17 @@ export default {
             transform: translateX(-50%);
             font-size: 18px;
             font-weight: 300;
-            color: light(100);
+            color: dark(100);
         }
 
         &:active {
             cursor: default;
+        }
+
+        &.dark {
+            .stat-inside {
+                color: light(100);
+            }
         }
     }
 }

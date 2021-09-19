@@ -17,17 +17,18 @@
             />
 
             <Button
-                id="chart-reset-btn"
-                class="red s-size s-text right"
+                id="chart-edit-btn"
+                class="primary s-size s-text right"
                 :ignoreColorMode="true"
+                @click="showEditDialog"
             >
                 <template v-slot:text>
-                    <span id="chart-reset-btn-text">
-                        Remove a country
+                    <span id="chart-edit-btn-text">
+                        Edit the chart
                     </span>
 
                     <span class="material-icons">
-                        delete
+                        edit
                     </span>
                 </template>
             </Button>
@@ -49,7 +50,7 @@ import Button from '@/components/Button.vue'
 import Bar from '@/components/charts/Bar.vue'
 import Pie from '@/components/charts/Pie.vue'
 import Table from '@/components/charts/Table.vue'
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
     components: {
@@ -73,17 +74,32 @@ export default {
         }
     },
     methods: {
+        ...mapMutations([
+            'setDialog'
+        ]),
         updateChartData() {
             this.chartData = {
                 countries: this.comparisonList,
                 compare: this.compare.selected
             }
+        },
+        showEditDialog() {
+            this.setDialog({
+                show: true,
+                component: 'EditChart',
+                title: 'Edit chart',
+                size: {
+                    width: '400px',
+                    height: 'auto'
+                }
+            })
         }
     },
     computed: {
         ...mapState([
             'comparisonList',
             'sortBy',
+            'dialog',
             'options'
         ])
     },

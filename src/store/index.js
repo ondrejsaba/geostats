@@ -22,7 +22,18 @@ export default createStore({
     filteredCountriesData: [],
 
     // local storage
-    options: {}
+    options: {},
+
+    // dialog
+    dialog: {
+      show: false,
+      component: '',
+      title: 'Dialog',
+      size: {
+        width: '400px',
+        height: '300px'
+      }
+    }
   },
   mutations: {
     // menu
@@ -80,6 +91,10 @@ export default createStore({
       } else {
         state.comparisonList = state.comparisonList.filter(country => country != countryName)
       }
+    },
+
+    setComparisonList(state, payload) {
+      state.comparisonList = [...payload]
     },
 
     // countries data
@@ -145,6 +160,14 @@ export default createStore({
 
       state.options[option] = value
       localStorage.setItem('localOptions', JSON.stringify(state.options))
+    },
+
+    // dialog
+    setDialog(state, payload) {
+      state.dialog = {
+        ...state.dialog,
+        ...payload
+      }
     }
   },
   actions: {

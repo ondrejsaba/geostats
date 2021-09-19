@@ -4,8 +4,7 @@
 
     <transition name="fade">
       <DarkenBox
-        v-if="showDarkenBox"
-        @click="hideDarkenBox"
+        v-if="showDarkenBox || dialog.show"
       />
     </transition>
 
@@ -16,34 +15,42 @@
     </transition>
 
     <router-view />
+
+    <transition
+      name="dialog"
+      class="zoom-bounce"
+    >
+      <Dialog
+        v-if="dialog.show"
+      />
+    </transition>
   </div>
 </template>
 
 <script>
-import Navbar from './components/Navbar.vue'
-import DarkenBox from './components/DarkenBox.vue'
-import SideMenu from './components/SideMenu.vue'
+import Navbar from '@/components/Navbar.vue'
+import DarkenBox from '@/components/DarkenBox.vue'
+import SideMenu from '@/components/SideMenu.vue'
+import Dialog from '@/components/Dialog.vue'
 import { mapMutations, mapState } from 'vuex'
 
 export default {
   components: {
     Navbar,
     DarkenBox,
-    SideMenu
+    SideMenu,
+    Dialog
   },
   methods: {
     ...mapMutations([
       'setMenuOpened',
       'syncOptions'
-    ]),
-    hideDarkenBox() {
-      // hide everything that the darken box depends on
-      this.setMenuOpened()
-    }
+    ])
   },
   computed: {
     ...mapState([
       'menuOpened',
+      'dialog',
       'options'
     ]),
     showDarkenBox() {

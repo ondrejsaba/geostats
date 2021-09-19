@@ -1,8 +1,50 @@
 <template>
-    <div id="darken-box">
+    <div
+        id="darken-box"
+        @click="hideDarkenBox"
+    >
         <slot></slot>
     </div>
 </template>
+
+<script>
+import { mapState } from 'vuex'
+
+export default {
+    methods: {
+        hideDarkenBox() {
+            const hideComponents = {
+                'setMenuOpened': {
+                    if: this.menuOpened,
+                    params: false
+                },
+                'setDialog': {
+                    if: this.dialog.show,
+                    params: {
+                        show: false
+                    }
+                }
+            }
+
+            Object.entries(hideComponents).forEach(([method, args]) => {
+                if (args.if) {
+                    if (args.params) {
+                        this.$store.commit(method, args.params)
+                    } else {
+                        this.$store.commit(method)
+                    }
+                }
+            })
+        }
+    },
+    computed: {
+        ...mapState([
+            'menuOpened',
+            'dialog'
+        ])
+    }
+}
+</script>
 
 <style lang="scss">
 @import "../sass/_variables.scss";

@@ -6,9 +6,13 @@
             light: !options.darkMode && !ignoreColorMode
         }"
     >
-        <slot name="text">
+        <slot v-if="$slots.text" name="text">
             Button
         </slot>
+
+        <span v-if="icon" class="material-icons">
+            {{ icon }}
+        </span>
 
         <div v-if="$slots.hint" class="hint hint-bottom">
             <slot name="hint"></slot>
@@ -21,7 +25,14 @@ import { mapState } from 'vuex'
 
 export default {
     props: {
-        ignoreColorMode: Boolean
+        ignoreColorMode: {
+            type: Boolean,
+            required: false
+        },
+        icon: {
+            type: String,
+            required: false
+        }
     },
     computed: {
         ...mapState([
