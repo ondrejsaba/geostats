@@ -48,16 +48,29 @@
             </div>
         </div>
 
-        <Button
-            class="red s-size s-text center mb-10"
-            :ignoreColorMode="true"
-            :icon="'delete'"
-            @click="removeAllCountries"
-        >
-            <template v-slot:text>
-                Remove all countries
-            </template>
-        </Button>
+        <div class="center mb-10">
+            <Button
+                class="primary s-size s-text mr-10"
+                :ignoreColorMode="true"
+                :icon="'shuffle'"
+                @click="reverseCountries"
+            >
+                <template v-slot:text>
+                    Reverse
+                </template>
+            </Button>
+            
+            <Button
+                class="red s-size s-text"
+                :ignoreColorMode="true"
+                :icon="'delete'"
+                @click="removeAllCountries"
+            >
+                <template v-slot:text>
+                    Remove all countries
+                </template>
+            </Button>
+        </div>
     </div>
 </template>
 
@@ -118,6 +131,9 @@ export default {
                     name: 'Home'
                 })
             }, 200)
+        },
+        reverseCountries() {
+            this.setComparisonList(this.comparisonList.reverse())
         }
     },
     computed: {

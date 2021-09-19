@@ -24,7 +24,7 @@
             >
                 <template v-slot:text>
                     <span id="chart-edit-btn-text">
-                        Edit the chart
+                        Edit chart
                     </span>
 
                     <span class="material-icons">
