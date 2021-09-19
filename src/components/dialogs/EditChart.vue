@@ -111,7 +111,9 @@ export default {
                 list[moveToPosition] = country
                 list[countryIndex] = savedCountry
 
-                this.setComparisonList(list)
+                this.setComparisonList({
+                    list: list
+                })
             }
         },
         removeFromComparison(country) {
@@ -125,7 +127,12 @@ export default {
             })
 
             setTimeout(() => {
-                this.setComparisonList([])
+                this.setComparisonList({
+                    list: [],
+                    callback: (state) => {
+                        state.chartColors = {}
+                    }
+                })
 
                 this.$router.push({
                     name: 'Home'
