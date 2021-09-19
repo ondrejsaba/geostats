@@ -7,8 +7,7 @@ const chart = {
     },
     data() {
         return {
-            graphData: [],
-            graphColors: ['#006699', '#6E4673', '#649E0B', '#F6921E', '#D14343', '#00AFAF']
+            graphData: []
         }
     },
     methods: {
@@ -88,7 +87,8 @@ const chart = {
     },
     computed: {
         ...mapState([
-            'countriesData'
+            'countriesData',
+            'chartColors'
         ]),
         graphMax() {
            return Math.max(...this.graphData.map(bar => bar.value))

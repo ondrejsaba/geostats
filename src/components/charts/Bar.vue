@@ -21,11 +21,11 @@
         <div id="y-axis">
             <div
                 class="bar"
-                v-for="(bar, index) in graphData"
+                v-for="bar in graphData"
                 :key="bar.label"
                 :style="{
                     height: `${100 / (graphMax / bar.value)}%`,
-                    backgroundColor: graphColors[index]
+                    backgroundColor: chartColors[bar.label]
                 }"
                 :class="{
                     dark: options.darkMode
