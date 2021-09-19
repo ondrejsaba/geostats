@@ -22,7 +22,8 @@
                     <Button
                         class="s-size s-text mr-5"
                         :class="{
-                            inactive: index == 0
+                            'inactive': index == 0,
+                            'light-text': !options.darkMode && index == 0
                         }"
                         :icon="'arrow_upward'"
                         @click="moveCountry(country, 'up')"
@@ -31,7 +32,8 @@
                     <Button
                         class="s-size s-text mr-5"
                         :class="{
-                            inactive: index == comparisonList.length - 1
+                            'inactive': index == comparisonList.length - 1,
+                            'light-text': !options.darkMode && index == comparisonList.length - 1
                         }"
                         :icon="'arrow_downward'"
                         @click="moveCountry(country, 'down')"
@@ -140,7 +142,9 @@ export default {
             }, 200)
         },
         reverseCountries() {
-            this.setComparisonList(this.comparisonList.reverse())
+            this.setComparisonList({
+                list: this.comparisonList.reverse()
+            })
         }
     },
     computed: {
@@ -159,7 +163,7 @@ export default {
 #compared-countries-list {
     width: calc(100% - 20px);
     height: auto;
-    border: 1px solid dark(200);
+    border: 1px solid light(300);
     margin: 10px;
 
     .compared-countries-item {
@@ -168,10 +172,10 @@ export default {
         line-height: 40px;
         padding-left: 10px;
         font-size: 18px;
-        background-color: lighten(dark(100), 5%);
+        background-color: light(100);
 
         &:not(:first-of-type) {
-            border-top: 1px solid dark(200);
+            border-top: 1px solid light(300);
         }
 
         .inline-flag {
@@ -183,8 +187,24 @@ export default {
             width: auto;
             height: 100%;
             padding: 0 5px 0 5px;
-            border-left: 1px solid dark(200);
+            border-left: 1px solid light(300);
             float: right;
+        }
+    }
+
+    &.dark {
+        border: 1px solid dark(200);
+
+        .compared-countries-item {
+            background-color: lighten(dark(100), 5%);
+
+            &:not(:first-of-type) {
+                border-top: 1px solid dark(200);
+            }
+
+            .compared-countries-item-btns {
+                border-left: 1px solid dark(200);
+            }
         }
     }
 }

@@ -98,8 +98,6 @@ export default createStore({
 
         // assign a random color out of the possible ones to the country
         state.chartColors[countryName] = availableColors[Math.floor(Math.random() * availableColors.length)]
-
-        console.log(state.chartColors)
       } else {
         state.comparisonList = state.comparisonList.filter(country => country != countryName)
         state.chartColors = Object.fromEntries(Object.entries(state.chartColors).filter(([country]) => country != countryName))

@@ -55,7 +55,7 @@
     }
 
     &.light {
-        border: 1px solid light(200);
+        border: 1px solid darken(light(200), 5%);
 
         &:hover {
             border: 1px solid light(300);
@@ -104,12 +104,13 @@
     }
 
     &.inactive {
-        border: 1px solid darken(light(500), 20%);
+        border: transparent;
         background-color: rgba(darken(light(500), 10%), 0.5);
         color: light(300);
 
         &:hover {
             background-color: rgba(darken(light(500), 10%), 0.5);
+            border: transparent;
         }
     }
 
@@ -304,6 +305,10 @@ main.content {
 
 .rotate180 {
     transform: rotate(180deg);
+}
+
+.light-text {
+    color: light(100) !important;
 }
 
 a {

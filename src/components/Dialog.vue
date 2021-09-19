@@ -95,7 +95,7 @@ export default {
     .dialog-title {
         width: 100%;
         height: 40px;
-        border-bottom: 1px solid darken(light(200), 5%);
+        border-bottom: 1px solid light(300);
         box-sizing: border-box;
         font-size: 24px;
         font-weight: 600;
