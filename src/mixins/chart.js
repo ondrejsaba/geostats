@@ -81,8 +81,8 @@ const chart = {
                 }
             })
         },
-        getShortenedName(name) {
-            return name.length > 14 ? name.substring(0, 14) + "..." : name
+        getShortenedName(name, maxLength) {
+            return name.length > maxLength ? name.substring(0, maxLength) + "..." : name
         }
     },
     computed: {

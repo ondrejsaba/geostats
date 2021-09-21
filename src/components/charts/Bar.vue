@@ -39,7 +39,7 @@
                     >
 
                     <span class="label">
-                        {{ getShortenedName(bar.label) }}
+                        {{ getShortenedName(bar.label, 14) }}
                     </span>
                 </div>
 
