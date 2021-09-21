@@ -12,11 +12,11 @@
 
         <template v-slot:hint>
             <span v-if="sortDirection == 'ascend'">
-                Ascending order
+                Ascending
             </span>
 
             <span v-else>
-                Descending order
+                Descending
             </span>
         </template>
     </Button>
@@ -24,19 +24,19 @@
 
 <script>
 import Button from './Button.vue'
-import { mapMutations, mapState } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
     components: {
         Button
     },
     methods: {
-        ...mapMutations([
+        ...mapActions('filters', [
             'setSortDirection'
         ])
     },
     computed: {
-        ...mapState([
+        ...mapState('filters', [
             'sortDirection'
         ])
     }

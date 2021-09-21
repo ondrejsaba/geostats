@@ -59,7 +59,7 @@
                     red: isBeingCompared
                 }"
                 :ignoreColorMode="true"
-                @click="modifyComparisonList"
+                @click="addToComparisonList"
             >
                 <template v-slot:text>
                     <span v-if="!isBeingCompared" class="text">
@@ -85,7 +85,7 @@
 
 <script>
 import Button from './Button.vue'
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
     components: {
@@ -95,21 +95,30 @@ export default {
         countryInfo: Object
     },
     methods: {
-        modifyComparisonList() {
+        ...mapMutations('comparison', [
+            'modifyComparisonList'
+        ]),
+        addToComparisonList() {
             if (this.comparisonList.length < 6 || this.comparisonList.includes(this.countryInfo.name)) {
-                this.$store.commit('modifyComparisonList', {
+                this.modifyComparisonList({
                     countryName: this.countryInfo.name
                 })
             }
         }
     },
     computed: {
-        ...mapState([
-            'pickedFilter',
+        ...mapState('search', [
             'searchMode',
-            'searchQuery',
-            'comparisonList',
+            'searchQuery'
+        ]),
+        ...mapState('options', [
             'options'
+        ]),
+        ...mapState('comparison', [
+            'comparisonList'
+        ]),
+        ...mapState('filters', [
+            'pickedFilter'
         ]),
         isBeingCompared() {
             return this.comparisonList.includes(this.countryInfo.name)

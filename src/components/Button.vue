@@ -35,7 +35,7 @@ export default {
         }
     },
     computed: {
-        ...mapState([
+        ...mapState('options', [
             'options'
         ])
     }

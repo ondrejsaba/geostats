@@ -42,7 +42,7 @@ import FilterSelect from './FilterSelect.vue'
 import SelectList from './SelectList.vue'
 import SortDirection from './SortDirection.vue'
 import FiltersData from '../json/filters.json'
-import { mapMutations, mapState } from 'vuex'
+import { mapMutations, mapActions, mapState } from 'vuex'
 
 export default {
     components: {
@@ -58,22 +58,24 @@ export default {
         }
     },
     methods: {
-        ...mapMutations([
+        ...mapMutations('filters', [
             'setPickedFilter',
-            'setFilteredCountriesData',
             'setSortBy'
+        ]),
+        ...mapActions('data', [
+            'setFilteredCountriesData'
         ]),
         countryIdToName(id) {
             return FiltersData[id].name.en
         }
     },
     computed: {
-        ...mapState([
+        ...mapState('options', [
             'options'
         ]),
         pickedFilter: {
             get() {
-                return this.$store.state.pickedFilter
+                return this.$store.state.filters.pickedFilter
             },
             set(value) {
                 this.setPickedFilter({id: value})
@@ -81,7 +83,7 @@ export default {
         },
         sortBy: {
             get() {
-                return this.$store.state.sortBy
+                return this.$store.state.filters.sortBy
             },
             set(value) {
                 this.setSortBy({sort: value})

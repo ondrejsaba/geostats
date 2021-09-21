@@ -63,7 +63,7 @@ export default {
         Button
     },
     methods: {
-        ...mapMutations([
+        ...mapMutations('menu', [
             'setMenuOpened'
         ]),
         compare() {
@@ -76,9 +76,13 @@ export default {
         }
     },
     computed: {
-        ...mapState([
-            'menuOpened',
-            'comparisonList',
+        ...mapState('menu', [
+            'menuOpened'
+        ]),
+        ...mapState('comparison', [
+            'comparisonList'
+        ]),
+        ...mapState('options', [
             'options'
         ]),
         menuIcon() {

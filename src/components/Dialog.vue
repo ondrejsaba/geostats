@@ -42,7 +42,7 @@ export default {
         Button
     },
     methods: {
-        ...mapMutations([
+        ...mapMutations('dialog', [
             'setDialog'
         ]),
         closeDialog() {
@@ -52,9 +52,11 @@ export default {
         }
     },
     computed: {
-        ...mapState([
-            'dialog',
+        ...mapState('options', [
             'options'
+        ]),
+        ...mapState('dialog', [
+            'dialog'
         ])
     }
 }

@@ -42,16 +42,22 @@ export default {
     Dialog
   },
   methods: {
-    ...mapMutations([
-      'setMenuOpened',
+    ...mapMutations('menu', [
+      'setMenuOpened'
+    ]),
+    ...mapMutations('options', [
       'syncOptions'
     ])
   },
   computed: {
-    ...mapState([
-      'menuOpened',
-      'dialog',
+    ...mapState('menu', [
+      'menuOpened'
+    ]),
+    ...mapState('options', [
       'options'
+    ]),
+    ...mapState('dialog', [
+      'dialog',
     ]),
     showDarkenBox() {
       return this.menuOpened

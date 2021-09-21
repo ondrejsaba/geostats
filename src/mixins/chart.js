@@ -86,8 +86,10 @@ const chart = {
         }
     },
     computed: {
-        ...mapState([
-            'countriesData',
+        ...mapState('data', [
+            'countriesData'
+        ]),
+        ...mapState('comparison', [
             'chartColors'
         ]),
         graphMax() {

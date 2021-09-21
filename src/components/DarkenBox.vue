@@ -14,11 +14,11 @@ export default {
     methods: {
         hideDarkenBox() {
             const hideComponents = {
-                'setMenuOpened': {
+                'menu/setMenuOpened': {
                     if: this.menuOpened,
                     params: false
                 },
-                'setDialog': {
+                'dialog/setDialog': {
                     if: this.dialog.show,
                     params: {
                         show: false
@@ -38,8 +38,10 @@ export default {
         }
     },
     computed: {
-        ...mapState([
-            'menuOpened',
+        ...mapState('menu', [
+            'menuOpened'
+        ]),
+        ...mapState('dialog', [
             'dialog'
         ])
     }

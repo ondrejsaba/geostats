@@ -32,7 +32,7 @@ import { mapMutations, mapState } from 'vuex'
 
 export default {
     methods: {
-        ...mapMutations([
+        ...mapMutations('search', [
             'setSearchMode',
             'setSearchQuery'
         ]),
@@ -43,9 +43,11 @@ export default {
         }
     },
     computed: {
-        ...mapState([
+        ...mapState('search', [
             'searchMode',
-            'searchQuery',
+            'searchQuery'
+        ]),
+        ...mapState('options', [
             'options'
         ]),
         query: {

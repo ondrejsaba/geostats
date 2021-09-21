@@ -21,12 +21,12 @@ import { mapMutations, mapState } from 'vuex'
 
 export default {
     methods: {
-        ...mapMutations([
+        ...mapMutations('options', [
             'changeOption'
         ])
     },
     computed: {
-        ...mapState([
+        ...mapState('options', [
             'options'
         ]),
         colorModeIcon() {

@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
     data() {
@@ -70,6 +70,10 @@ export default {
         }
     },
     methods: {
+        ...mapActions('data', [
+            'getCountriesData'
+        ]),
+
         // saves the stats after getting data from the api
         getStats() {
             const {
@@ -98,8 +102,10 @@ export default {
         }
     },
     computed: {
-        ...mapState([
-            'countriesData',
+        ...mapState('data', [
+            'countriesData'
+        ]),
+        ...mapState('options', [
             'options'
         ]),
 
@@ -146,7 +152,7 @@ export default {
     mounted() {
         // if there was no prior communication with the API, then get the data
         if (!this.countryInfoLoaded) {
-            this.$store.dispatch('getCountriesData')
+            this.getCountriesData()
         } else {
             this.getStats()
         }

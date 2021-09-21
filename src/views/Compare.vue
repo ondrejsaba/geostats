@@ -74,7 +74,7 @@ export default {
         }
     },
     methods: {
-        ...mapMutations([
+        ...mapMutations('dialog', [
             'setDialog'
         ]),
         updateChartData() {
@@ -96,10 +96,13 @@ export default {
         }
     },
     computed: {
-        ...mapState([
-            'comparisonList',
-            'sortBy',
-            'dialog',
+        ...mapState('filters', [
+            'sortBy'
+        ]),
+        ...mapState('comparison', [
+            'comparisonList'
+        ]),
+        ...mapState('options', [
             'options'
         ])
     },

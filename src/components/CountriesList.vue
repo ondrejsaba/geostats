@@ -29,28 +29,35 @@
 
 <script>
 import CountryCard from './CountryCard.vue'
-import { mapMutations, mapState } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
     components: {
         CountryCard
     },
     methods: {
-        ...mapMutations([
-            'setFilteredCountriesData'
+        ...mapActions('data', [
+            'setFilteredCountriesData',
+            'getCountriesData'
         ])
     },
     computed: {
-        ...mapState([
-            'filteredCountriesData',
-            'pickedFilter',
+        ...mapState('search', [
             'searchMode',
-            'searchQuery',
+            'searchQuery'
+        ]),
+        ...mapState('filters', [
+            'pickedFilter'
+        ]),
+        ...mapState('data', [
+            'filteredCountriesData'
+        ]),
+        ...mapState('options', [
             'options'
         ])
     },
     mounted() {
-        this.$store.dispatch('getCountriesData')
+        this.getCountriesData()
     },
     watch: {
         pickedFilter: function() {

@@ -22,7 +22,7 @@ export default {
     CountriesList
   },
   computed: {
-    ...mapState([
+    ...mapState('search', [
       'searchMode'
     ])
   }

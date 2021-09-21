@@ -85,9 +85,11 @@ export default {
         Button
     },
     methods: {
-        ...mapMutations([
+        ...mapMutations('comparison', [
             'modifyComparisonList',
-            'setComparisonList',
+            'setComparisonList'
+        ]),
+        ...mapMutations('dialog', [
             'setDialog'
         ]),
         getShortenedName(name) {
@@ -148,9 +150,13 @@ export default {
         }
     },
     computed: {
-        ...mapState([
-            'countriesData',
-            'comparisonList',
+        ...mapState('data', [
+            'countriesData'
+        ]),
+        ...mapState('comparison', [
+            'comparisonList'
+        ]),
+        ...mapState('options', [
             'options'
         ])
     }
