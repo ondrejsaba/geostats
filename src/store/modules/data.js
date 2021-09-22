@@ -18,40 +18,52 @@ const moduleData = {
               state.filteredCountriesData = state.countriesData.filter(country => {
                 let filterId = ''
       
-                if (country.region == 'Americas') {
-                  if (['Caribbean', 'South America'].includes(country.subregion)) {
+                if (country.continent == 'Americas') {
+                  if (['Caribbean', 'South America'].includes(country.region)) {
                     filterId = 'south_america'
                   } else {
                     filterId = 'north_america'
                   }
                 } else {
-                  if (filterId) {
-                    filterId = country.region.charAt(0).toLowerCase() + country.region.slice(1)
+                  if (country.continent && country.region) {
+                    filterId = country.continent.charAt(0).toLowerCase() + country.continent.slice(1)
                   }
                 }
       
                 return filterId == filters.pickedFilter || filters.pickedFilter == 'world'
               })
             }
-      
-            // sort
-            state.filteredCountriesData = state.filteredCountriesData.sort((a, b) => {
-              const sortingComparators = {
-                'Name': a.name.localeCompare(b.name),
-                'Population': a.population < b.population ? 1 : -1,
-                'Area': a.area < b.area ? 1 : -1
-              }
-      
-              return sortingComparators[filters.sortBy]
+
+            // check if the country has all required data
+            state.filteredCountriesData = state.filteredCountriesData.filter(country => {
+              const checkKeys = ['continent', 'region', 'population', 'area']
+
+              const existingKeys = Object.keys(country).reduce((total, current) => {
+                return checkKeys.includes(current) ? total + 1 : total
+              }, 0)
+
+              return existingKeys == checkKeys.length
             })
-      
-            // order (keep it)
-            if (filters.sortDirection == 'ascend') {
-              state.filteredCountriesData = state.filteredCountriesData.reverse()
-            }
         },
         reverseFilteredCountriesData(state) {
             state.filteredCountriesData = state.filteredCountriesData.reverse()
+        },
+        sortFilteredCountriesData(state, { comparator }) {
+          state.filteredCountriesData = state.filteredCountriesData.sort((a, b) => {
+            const sortingComparators = {
+              'Name': a.name.localeCompare(b.name),
+              'Population': a.population < b.population ? 1 : -1,
+              'Population density': (a.population / a.area) < (b.population / b.area) ? 1 : -1,
+              'Area': a.area < b.area ? 1 : -1
+            }
+    
+            return sortingComparators[comparator]
+          })
+        },
+        keepOrder(state, { filters }) {
+          if (filters.sortDirection == 'ascend') {
+            state.filteredCountriesData = state.filteredCountriesData.reverse()
+          }
         }
     },
     actions: {
@@ -59,6 +71,14 @@ const moduleData = {
             commit('setFilteredCountriesData', {
                 search: rootState.search,
                 filters: rootState.filters
+            })
+
+            commit('sortFilteredCountriesData', {
+              comparator: rootState.filters.sortBy
+            })
+
+            commit('keepOrder', {
+              filters: rootState.filters
             })
         },
         getCountriesData({ commit, dispatch }) {

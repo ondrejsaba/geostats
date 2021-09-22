@@ -14,22 +14,13 @@
         >
             {{ filter.name.en }}
         </FilterSelect>
-        
-        <SelectList
-            id="filter-select-list"
-            v-model="pickedFilter"
-            :select-options="filterSelectListOptions"
-            :options-mod="countryIdToName"
-            :static-width="'170px'"
-            :label="'Region:'"
-        />
     </section>
 
     <section id="sort-section" class="center-section mt-20">
         <SelectList
             v-model="sortBy"
             :select-options="sortOptions"
-            :static-width="'120px'"
+            :static-width="'190px'"
             :label="'Sort by:'"
         />
 
@@ -53,7 +44,7 @@ export default {
     data() {
         return {
             filters: FiltersData,
-            sortOptions: ['Population', 'Area', 'Name'],
+            sortOptions: ['Population', 'Population density', 'Area', 'Name'],
             filterSelectListOptions: [...Object.keys(FiltersData)]
         }
     },

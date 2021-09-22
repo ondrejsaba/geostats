@@ -126,6 +126,10 @@ export default {
         },
 
         neighborFlags() {
+            if (!this.countryInfo.borders) {
+                return false
+            }
+
             const neighborObjects = this.countryInfo.borders.map(countryCode => {
                 return this.countriesData.filter(country => {
                     return country.alpha3Code == countryCode
@@ -146,6 +150,8 @@ export default {
         countryInfoLoaded: function() {
             /* when the countriesData variable is filled with data, then get
             the important data and save it to the displayedStats variable */
+            console.log(this.countryInfo.area)
+
             this.getStats()
         }
     },

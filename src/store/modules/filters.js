@@ -26,11 +26,11 @@ const moduleFilters = {
         }
     },
     actions: {
-        setSortDirection({ commit }) {
+        setSortDirection({ commit, dispatch }) {
             commit('setSortDirection')
 
             // actually reverse the order
-            commit('data/reverseFilteredCountriesData', null, { root: true })
+            dispatch('data/setFilteredCountriesData', null, { root: true })
         }
     }
 }

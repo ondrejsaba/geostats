@@ -23,7 +23,7 @@
             <div
                 class="card-flag"
                 :style="{
-                    backgroundImage: 'url(' + countryInfo.flag + ')'
+                    backgroundImage: 'url(' + countryInfo.flags[0] + ')'
                 }"
             >
             </div>
