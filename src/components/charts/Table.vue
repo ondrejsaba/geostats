@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="col-10 col-border">
-                    {{ getShortenedName(country.label, 24) }}
+                    {{ country.label }}
                 </div>
 
                 <div class="col-5 col-border">
@@ -109,6 +109,9 @@ export default {
             },
             deep: true
         }
+    },
+    mounted() {
+        this.sortGraphData()
     }
 }
 </script>
@@ -136,22 +139,29 @@ export default {
             border-bottom: 1px solid light(200);
         }
 
-        .col-1 {
+        .col {
             position: relative;
             flex-basis: 0;
-            flex-grow: 1;
             height: 100%;
             line-height: 80px;
             padding: 0 20px 0 20px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .col-1 {
+            @extend .col;
+            flex-grow: 1;
         }
 
         .col-5 {
-            @extend .col-1;
+            @extend .col;
             flex-grow: 5;
         }
 
         .col-10 {
-            @extend .col-1;
+            @extend .col;
             flex-grow: 10;
         }
 

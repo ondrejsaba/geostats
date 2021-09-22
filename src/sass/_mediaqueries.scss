@@ -129,6 +129,11 @@
             display: none;
         }
     }
+
+    // table chart
+    #table-chart {
+        width: calc(100% - 100px);
+    }
 }
 
 @media only screen and (max-width: 700px) {
@@ -182,6 +187,12 @@
     .chart {
         height: calc(100vh - 230px - 4px);
     }
+
+    // table chart -> bigger width
+
+    #table-chart {
+        width: calc(100% - 40px);
+    }
 }
 
 @media only screen and (max-width: 500px) {
@@ -196,6 +207,41 @@
                     height: 12px;
                 }
             }
+        }
+    }
+}
+
+// height based media queries
+
+@media only screen and (max-height: 800px) {
+    #table-chart .row {
+        height: 60px;
+
+        .col-1, .col-5, .col-10 {
+            line-height: 60px;
+
+            span.material-icons.sort-arrow {
+                line-height: 60px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-height: 680px) {
+    #table-chart .row {
+        height: 40px;
+        font-size: 16px;
+
+        .col-1, .col-5, .col-10 {
+            line-height: 40px;
+
+            span.material-icons.sort-arrow {
+                line-height: 40px;
+            }
+        }
+
+        .center-flag {
+            width: 40%;
         }
     }
 }

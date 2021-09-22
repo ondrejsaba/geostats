@@ -159,6 +159,7 @@ export default {
     border-radius: 6px;
     box-sizing: border-box;
     color: dark(100);
+    overflow: hidden;
 
     &.dark {
         border: 1px solid dark(300);
