@@ -14,6 +14,15 @@
         >
             {{ filter.name.en }}
         </FilterSelect>
+        
+        <SelectList
+            id="filter-select-list"
+            v-model="pickedFilter"
+            :select-options="filterSelectListOptions"
+            :options-mod="countryIdToName"
+            :static-width="'170px'"
+            :label="'Region:'"
+        />
     </section>
 
     <section id="sort-section" class="center-section mt-20">

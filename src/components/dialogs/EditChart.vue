@@ -98,8 +98,8 @@ export default {
         getCountryFlag(name) {
             const data = this.countriesData.filter(country => country.name == name)[0]
 
-            const { flag } = data
-            return flag
+            const { flags: [ flagSvg ] } = data
+            return flagSvg
         },
         moveCountry(country, direction) {
             let list = [...this.comparisonList]
