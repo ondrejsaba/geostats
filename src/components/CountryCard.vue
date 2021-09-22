@@ -14,7 +14,7 @@
             <h2>
                 <img
                     class="inline-flag"
-                    :src="countryInfo.flag"
+                    :src="countryInfo.flags[0]"
                 >
 
                 {{ countryInfo.name }}

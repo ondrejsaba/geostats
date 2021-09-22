@@ -25,7 +25,9 @@ const moduleData = {
                     filterId = 'north_america'
                   }
                 } else {
-                  filterId = country.region.charAt(0).toLowerCase() + country.region.slice(1)
+                  if (filterId) {
+                    filterId = country.region.charAt(0).toLowerCase() + country.region.slice(1)
+                  }
                 }
       
                 return filterId == filters.pickedFilter || filters.pickedFilter == 'world'
@@ -60,14 +62,14 @@ const moduleData = {
             })
         },
         getCountriesData({ commit, dispatch }) {
-            fetch('https://restcountries.eu/rest/v2/all')
-                .then((response) => {
-                    return response.json()
-                })
-                .then((data) => {
-                    commit('setCountriesData', {data: data})
-                    dispatch('setFilteredCountriesData')
-                })
+            fetch('/v2/all')
+              .then((response) => {
+                  return response.json()
+              })
+              .then((data) => {
+                  commit('setCountriesData', {data: data})
+                  dispatch('setFilteredCountriesData')
+              })
         }
     }
 }

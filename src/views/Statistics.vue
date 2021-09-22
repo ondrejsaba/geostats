@@ -7,7 +7,7 @@
         <h2 id="countryNameText">
             <img
                 class="country-icon"
-                :src="countryInfo.flag"
+                :src="countryInfo.flags[0]"
                 :alt="countryName"
             >
             {{ countryName }}
@@ -135,7 +135,7 @@ export default {
             const neighborFlags = neighborObjects.map(country => {
                 return {
                     name: country.name,
-                    flag: country.flag
+                    flag: country.flags[0]
                 }
             })
 

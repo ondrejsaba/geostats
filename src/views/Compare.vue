@@ -77,6 +77,9 @@ export default {
         ...mapMutations('dialog', [
             'setDialog'
         ]),
+        ...mapMutations('comparison', [
+            'setComparisonList'
+        ]),
         updateChartData() {
             this.chartData = {
                 countries: this.comparisonList,
@@ -113,6 +116,10 @@ export default {
         compare: {
             handler: function() {
                 this.updateChartData()
+
+                if (this.chartType.selected == 'Table') {
+                    // sort the comparison list
+                }
             },
             deep: true,
             immediate: true

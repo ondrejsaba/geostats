@@ -21,14 +21,14 @@ const moduleComparison = {
               state.comparisonList = state.comparisonList.filter(country => country != countryName)
               state.chartColors = Object.fromEntries(Object.entries(state.chartColors).filter(([country]) => country != countryName))
             }
-          },
-          setComparisonList(state, { list, callback }) {
+        },
+        setComparisonList(state, { list, callback }) {
             state.comparisonList = [...list]
       
             if (callback) {
               callback(state)
             }
-          }
+        }
     }
 }
 

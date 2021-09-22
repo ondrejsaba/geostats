@@ -13,9 +13,9 @@ const chart = {
     methods: {
         getCountryFlag(name) {
             const data = this.countriesData.filter(country => country.name == name)[0]
-            const {flag} = data
+            const {flags: [ flagSvg ]} = data
 
-            return flag
+            return flagSvg
         },
         getCountryData(name) {
             const data = this.countriesData.filter(country => country.name == name)[0]
