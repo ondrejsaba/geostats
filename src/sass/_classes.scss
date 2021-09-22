@@ -311,6 +311,15 @@ main.content {
     color: light(100) !important;
 }
 
+.clickable {
+    cursor: pointer;
+    user-select: none;
+
+    &:active {
+        cursor: default;
+    }
+}
+
 a {
     text-decoration: none;
 }

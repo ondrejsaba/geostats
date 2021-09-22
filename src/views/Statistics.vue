@@ -58,8 +58,8 @@ export default {
         return {
             displayedStats: {},
             statIcons: {
-                'Region': 'public',
-                'Subregion': 'place',
+                'Continent': 'public',
+                'Region': 'place',
                 'Capital': 'home',
                 'Population': 'sentiment_satisfied',
                 'Area': 'layers',
@@ -77,8 +77,8 @@ export default {
         // saves the stats after getting data from the api
         getStats() {
             const {
+                continent,
                 region,
-                subregion,
                 capital,
                 population,
                 area,
@@ -90,8 +90,8 @@ export default {
             } = this.countryInfo
 
             this.displayedStats = {
+                'Continent': continent,
                 'Region': region,
-                'Subregion': subregion,
                 'Capital': capital,
                 'Population': population,
                 'Area': `${area} km2`,

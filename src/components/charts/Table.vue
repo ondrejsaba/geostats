@@ -15,8 +15,21 @@
                     Country name
                 </div>
 
-                <div class="col-5 col-border">
+                <div
+                    class="col-5 col-border clickable"
+                    @click="changeSortingDirection"
+                >
                     {{ data.compare }}
+
+                    <span class="material-icons sort-arrow">
+                        <span v-if="sortingDirection == 'descending'">
+                            arrow_downward
+                        </span>
+
+                        <span v-else>
+                            arrow_upward
+                        </span>
+                    </span>
                 </div>
             </div>
 
@@ -55,6 +68,32 @@ export default {
     props: {
         data: Object
     },
+    data() {
+        return {
+            sortingDirection: 'descending'
+        }
+    },
+    methods: {
+        changeSortingDirection() {
+            const switchDirection = {
+                'descending': 'ascending',
+                'ascending': 'descending'
+            }
+
+            this.sortingDirection = switchDirection[this.sortingDirection]
+            this.sortGraphData()
+        },
+        sortGraphData() {
+            this.graphData.sort((a, b) => {
+                const sortingComparators = {
+                    'descending': a.value < b.value ? 1 : -1,
+                    'ascending': b.value < a.value ? 1 : -1
+                }
+                    
+                return sortingComparators[this.sortingDirection]
+            })
+        }
+    },
     computed: {
         ...mapState('comparison', [
             'comparisonList'
@@ -62,6 +101,14 @@ export default {
         ...mapState('options', [
             'options'
         ])
+    },
+    watch: {
+        data: {
+            handler: function() {
+                this.sortGraphData()
+            },
+            deep: true
+        }
     }
 }
 </script>
@@ -128,6 +175,11 @@ export default {
 
         .col-1, .col-5, .col-10 {
             font-weight: 600;
+
+            span.material-icons.sort-arrow {
+                float: right;
+                line-height: 80px;
+            }
         }
     }
 
