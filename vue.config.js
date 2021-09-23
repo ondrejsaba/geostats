@@ -1,5 +1,8 @@
 module.exports = {
-    devServer: {
-        proxy: 'https://restcountries.com'
+    publicPath: ".",
+    configureWebpack: {
+        devServer: {
+            headers: { "Access-Control-Allow-Origin": "*" }
+        }
     }
-};
+}

@@ -82,7 +82,7 @@ const moduleData = {
             })
         },
         getCountriesData({ commit, dispatch }) {
-            fetch('/v2/all')
+            fetch('https://restcountries.com/v2/all')
               .then((response) => {
                   return response.json()
               })
