@@ -64,7 +64,7 @@ const chart = {
             n = (number / convertParams.divide).toString()
 
             if (n.includes('.')) {
-                n = n.substring(0, n.indexOf('.') + 2)
+                n = n.substring(0, n.indexOf('.') + 3)
             }
 
             n += convertParams.suffix

@@ -17,7 +17,27 @@
         </div>
 
         <div id="pie-chart-info">
-            
+            <div id="pie-countries-info-container">
+                <div
+                    class="pie-country-info clickable"
+                    v-for="country in graphData"
+                    :key="country.label"
+                    :style="{
+                        backgroundColor: chartColors[country.label]
+                    }"
+                    @click="statsLink(country.label)"
+                >
+                    <h2 class="country-label">
+                        <img class="label-flag" :src="getCountryFlag(country.label)">
+
+                        {{ country.label }}
+                    </h2>
+
+                    <p class="country-value">
+                        {{ convertLongNumber(country.value) }}
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -55,10 +75,12 @@ export default {
             this.size += 'px'
         },
         portionPercentage(value) {
-            return value / this.valuesCombined
+            return (value / this.valuesCombined) * 100
         },
-        percentageToDegrees(value) {
-            return (value * 360).toFixed(2)
+        sortGraphData() {
+            this.graphData.sort((a, b) => {
+                return a.value < b.value ? 1 : -1
+            })
         }
     },
     computed: {
@@ -75,9 +97,33 @@ export default {
             }, 0)
         },
         conicGradient() {
-            const gradientStops = ''
+            const gradientStops = this.graphData.map(({ value }) => {
+                return this.portionPercentage(value)
+            }).map((value, index) => {
+                let offset = this.graphData.reduce((total, { value: currentValue }, currentIndex) => {
+                    return currentIndex < index ? total + currentValue : total
+                }, 0)
+                offset = this.portionPercentage(offset)
 
-            return gradientStops
+                return offset + value
+            })
+
+            let gradientStyle = 'conic-gradient('
+
+            gradientStops.forEach((stop, index) => {
+                gradientStyle += this.chartColors[this.graphData[index].label] + ' 0 ' + stop + '%'
+                gradientStyle += index < gradientStops.length - 1 ? ',' : ')'
+            })
+
+            return gradientStyle
+        }
+    },
+    watch: {
+        graphData: {
+            handler: function() {
+                this.sortGraphData()
+            },
+            deep: true
         }
     },
     mounted() {
@@ -96,17 +142,59 @@ export default {
 #pie-chart-box {
     position: relative;
     display: inline-block;
-    width: calc(100% - 300px);
+    width: calc(100% - 400px);
     height: 100%;
     box-sizing: border-box;
 }
 
 #pie-chart-info {
+    position: relative;
     display: inline-block;
     vertical-align: top;
-    width: 300px;
+    width: 400px;
     height: 100%;
     box-sizing: border-box;
+}
+
+#pie-countries-info-container {
+    position: absolute;
+    width: calc(100% - 80px);
+    height: fit-content;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    .pie-country-info {
+        width: 100%;
+        height: 70px;
+
+        &:not(:first-of-type) {
+            margin-top: 10px;
+        }
+
+        .country-label {
+            margin: 0;
+            font-size: 18px;
+            line-height: 20px;
+            font-weight: 500;
+            padding: 10px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .label-flag {
+            display: inline;
+            height: 14px;
+            border: 1px solid light(100);
+        }
+
+        .country-value {
+            margin: 0;
+            line-height: 20px;
+            padding: 0 10px 0 10px;
+        }
+    }
 }
 
 #pie-chart {
