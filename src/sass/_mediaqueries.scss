@@ -244,4 +244,14 @@
             width: 40%;
         }
     }
+
+    #pie-countries-info-container {
+        .pie-country-info {
+            flex-basis: calc(50% - 10px);
+
+            .country-label {
+                width: 130px;
+            }
+        }
+    }
 }

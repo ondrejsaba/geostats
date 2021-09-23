@@ -35,6 +35,10 @@
 
                     <p class="country-value">
                         {{ convertLongNumber(country.value) }}
+
+                        <span class="country-value-percentage">
+                            ({{ portionPercentage(country.value).toFixed(2) }}%)
+                        </span>
                     </p>
                 </div>
             </div>
@@ -163,17 +167,20 @@ export default {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 
     .pie-country-info {
+        position: relative;
+        flex-basis: 100%;
         width: 100%;
         height: 70px;
-
-        &:not(:first-of-type) {
-            margin-top: 10px;
-        }
+        color: light(100);
 
         .country-label {
             margin: 0;
+            width: 300px;
             font-size: 18px;
             line-height: 20px;
             font-weight: 500;
@@ -193,6 +200,10 @@ export default {
             margin: 0;
             line-height: 20px;
             padding: 0 10px 0 10px;
+
+            .country-value-percentage {
+                font-size: 12px;
+            }
         }
     }
 }
@@ -210,7 +221,8 @@ export default {
 .chart {
     &.dark {
         #pie-chart {
-            border: 1px solid lighten(dark(100), 10%);
+            border: 1px solid dark(300);
+            box-shadow: 2px 2px 32px dark(200);
         }
     }
 }
