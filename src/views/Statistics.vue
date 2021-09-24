@@ -134,7 +134,7 @@ export default {
                 return this.countriesData.filter(country => {
                     return country.alpha3Code == countryCode
                 })
-            }).map(country => country[0])
+            }).map(country => country[0]).filter(country => country !== undefined)
 
             const neighborFlags = neighborObjects.map(country => {
                 return {
@@ -150,14 +150,13 @@ export default {
         countryInfoLoaded: function() {
             /* when the countriesData variable is filled with data, then get
             the important data and save it to the displayedStats variable */
-            console.log(this.countryInfo.area)
-
             this.getStats()
         }
     },
     mounted() {
         // if there was no prior communication with the API, then get the data
         if (!this.countryInfoLoaded) {
+            console.log('loading countries data')
             this.getCountriesData()
         } else {
             this.getStats()
