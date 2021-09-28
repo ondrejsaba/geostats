@@ -25,7 +25,7 @@
                 @click="compare"
             >
                 <template v-slot:text>
-                    Compare countries ({{ comparisonList.length }})
+                    {{ messages.navbar.compare }} ({{ comparisonList.length }})
 
                     <span class="material-icons">
                         bar_chart
@@ -33,7 +33,7 @@
                 </template>
 
                 <template v-if="comparisonList.length == 1" v-slot:hint>
-                    Add one more country to compare.
+                    {{ messages.navbar.tooFewToCompare }}
                 </template>
             </Button>
 
@@ -43,7 +43,7 @@
                 @click="goBack"
             >
                 <template v-slot:text>
-                    Back
+                    {{ messages.navbar.back }}
 
                     <span class="material-icons">
                         arrow_forward
@@ -84,6 +84,9 @@ export default {
         ]),
         ...mapState('options', [
             'options'
+        ]),
+        ...mapState('messages', [
+            'messages'
         ]),
         menuIcon() {
             return this.menuOpened ? 'close' : 'menu'

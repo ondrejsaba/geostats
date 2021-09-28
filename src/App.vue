@@ -1,5 +1,9 @@
 <template>
-  <div id="page" :class="{ dark: options.darkMode }">
+  <div
+    id="page"
+    v-if="loadedMessages"
+    :class="{ dark: options.darkMode }"
+  >
     <Navbar />
 
     <transition name="fade">
@@ -32,7 +36,7 @@ import Navbar from '@/components/Navbar.vue'
 import DarkenBox from '@/components/DarkenBox.vue'
 import SideMenu from '@/components/SideMenu.vue'
 import Dialog from '@/components/Dialog.vue'
-import { mapMutations, mapState } from 'vuex'
+import { mapActions, mapMutations, mapState } from 'vuex'
 
 export default {
   components: {
@@ -41,12 +45,20 @@ export default {
     SideMenu,
     Dialog
   },
+  data() {
+    return {
+      loadedMessages: false
+    }
+  },
   methods: {
     ...mapMutations('menu', [
       'setMenuOpened'
     ]),
     ...mapMutations('options', [
       'syncOptions'
+    ]),
+    ...mapActions('messages', [
+      'setMessages'
     ])
   },
   computed: {
@@ -59,12 +71,18 @@ export default {
     ...mapState('dialog', [
       'dialog',
     ]),
+    ...mapState('messages', [
+      'messages'
+    ]),
     showDarkenBox() {
       return this.menuOpened
     }
   },
   mounted() {
     this.syncOptions()
+    this.setMessages()
+
+    this.loadedMessages = true
   }
 }
 </script>

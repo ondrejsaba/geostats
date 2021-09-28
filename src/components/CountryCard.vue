@@ -14,7 +14,7 @@
             <h2>
                 <img
                     class="inline-flag"
-                    :src="countryInfo.flags[0]"
+                    :src="countryInfo.flag"
                 >
 
                 {{ countryInfo.name }}
@@ -23,7 +23,7 @@
             <div
                 class="card-flag"
                 :style="{
-                    backgroundImage: 'url(' + countryInfo.flags[0] + ')'
+                    backgroundImage: 'url(' + countryInfo.flag + ')'
                 }"
             >
             </div>
@@ -41,7 +41,7 @@
                 <Button class="statistics-btn s-size s-text">
                     <template v-slot:text>
                         <span class="text">
-                            Statistics
+                            {{ messages.countryCard.statistics }}
                         </span>
                         
                         <span class="material-icons">
@@ -63,11 +63,11 @@
             >
                 <template v-slot:text>
                     <span v-if="!isBeingCompared" class="text">
-                        Add to comparison
+                        {{ messages.countryCard.compareAdd }}
                     </span>
 
                     <span v-else class="text">
-                        Remove
+                        {{ messages.countryCard.compareRemove }}
                     </span>
 
                     <span class="material-icons">
@@ -76,7 +76,7 @@
                 </template>
 
                 <template v-if="!isBeingCompared && comparisonList.length >= 6" v-slot:hint>
-                    Too many countries.
+                    {{ messages.countryCard.tooMany }}
                 </template>
             </Button>
         </div>
@@ -119,6 +119,9 @@ export default {
         ]),
         ...mapState('filters', [
             'pickedFilter'
+        ]),
+        ...mapState('messages', [
+            'messages'
         ]),
         isBeingCompared() {
             return this.comparisonList.includes(this.countryInfo.name)

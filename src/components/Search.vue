@@ -6,7 +6,7 @@
             :class="{
                 dark: options.darkMode
             }"
-            placeholder="Search for countries"
+            :placeholder="messages.search.placeholder"
             v-model="query"
         >
 
@@ -49,6 +49,9 @@ export default {
         ]),
         ...mapState('options', [
             'options'
+        ]),
+        ...mapState('messages', [
+            'messages'
         ]),
         query: {
             get() {

@@ -1,37 +1,91 @@
 <template>
-    <div id="side-menu" :class="{ dark: options.darkMode }">
+    <div
+        id="side-menu"
+        :class="{ dark: options.darkMode }"
+        @click="updateValues"
+    >
         <div
             class="menu-option"
+            v-for="(optionSettings, changedOption) in menuOptions"
+            :key="changedOption"
             @click="changeOption({
-                option: 'darkMode',
-                value: !options.darkMode
+                option: changedOption,
+                value: optionSettings.newValue
             })"
         >
-            Color mode:
+            {{ optionSettings.text }}
 
             <div class="option-data">
-                {{ colorModeIcon }}
+                {{ optionSettings.shownData }}
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import { mapMutations, mapState } from 'vuex'
+import { mapActions, mapMutations, mapState } from 'vuex'
 
 export default {
+    data() {
+        return {
+            menuOptions: {}
+        }
+    },
     methods: {
+        ...mapActions('messages', [
+            'setMessages'
+        ]),
         ...mapMutations('options', [
             'changeOption'
-        ])
+        ]),
+        updateValues() {
+            this.setMessages()
+
+            this.menuOptions = {
+                darkMode: {
+                    text: this.messages.menu.colorMode,
+                    shownData: this.colorModeIcon,
+                    newValue: !this.options.darkMode
+                },
+                language: {
+                    text: this.messages.menu.language,
+                    shownData: this.selectedLanguageIcon,
+                    newValue: this.nextLanguage
+                }
+            }
+        }
     },
     computed: {
         ...mapState('options', [
             'options'
         ]),
+        ...mapState('messages', [
+            'messages'
+        ]),
         colorModeIcon() {
             return this.options.darkMode ? '🌙' : '☀️'
+        },
+        nextLanguage() {
+            const languageCodes = ['en', 'cz']
+            const currentIndex = languageCodes.indexOf(this.options.language)
+
+            if (currentIndex < languageCodes.length - 1) {
+                return languageCodes[currentIndex + 1]
+            } else {
+                return languageCodes[0]
+            }
+        },
+        selectedLanguageIcon() {
+            const languageToCountry = {
+                'en': '🇬🇧',
+                'cz': '🇨🇿'
+            }
+
+            return languageToCountry[this.options.language]
         }
+    },
+    mounted() {
+        this.updateValues()
     }
 }
 </script>
@@ -75,6 +129,7 @@ export default {
     font-size: 20px;
     font-weight: 500;
     padding-left: 20px;
+    user-select: none;
 
     &:hover {
         background-color: blue(100);
@@ -89,7 +144,8 @@ export default {
         position: absolute;
         top: 0;
         right: 0;
-        padding: 0 20px 0 20px;
+        width: 60px;
+        text-align: center;
         border-left: 1px solid darken(light(100), 7.5%);
     }
 

@@ -1,0 +1,37 @@
+{
+    "navbar": {
+        "compare": "Compare countries",
+        "tooFewToCompare": "Add one more country to compare.",
+        "back": "Back"
+    },
+    "menu": {
+        "colorMode": "Color mode",
+        "language": "Language"
+    },
+    "search": {
+        "placeholder": "Search for countries"
+    },
+    "filters": {
+        "world": "World",
+        "asia": "Asia",
+        "africa": "Africa",
+        "europe": "Europe",
+        "north_america": "North America",
+        "south_america": "South America",
+        "oceania": "Oceania"
+    },
+    "filtersLabels": {
+        "region": "Region:",
+        "sortBy": "Sort by:"
+    },
+    "countriesList": {
+        "notFound": "No countries found.",
+        "loading": "Loading, please wait..."
+    },
+    "countryCard": {
+        "statistics": "Statistics",
+        "compareAdd": "Add to comparison",
+        "compareRemove": "Remove",
+        "tooMany": "Too many countries."
+    }
+}

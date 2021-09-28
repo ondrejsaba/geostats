@@ -1,0 +1,37 @@
+{
+    "navbar": {
+        "compare": "Porovnat státy",
+        "tooFewToCompare": "Přidejte více států.",
+        "back": "Zpět"
+    },
+    "menu": {
+        "colorMode": "Barevný mód",
+        "language": "Jazyk"
+    },
+    "search": {
+        "placeholder": "Jméno státu"
+    },
+    "filters": {
+        "world": "Svět",
+        "asia": "Asie",
+        "africa": "Afrika",
+        "europe": "Evropa",
+        "north_america": "Severní Amerika",
+        "south_america": "Jižní Amerika",
+        "oceania": "Oceánie"
+    },
+    "filtersLabels": {
+        "region": "Region:",
+        "sortBy": "Řadit dle:"
+    },
+    "countriesList": {
+        "notFound": "Nebyly nalezeny žádné státy.",
+        "loading": "Načítání..."
+    },
+    "countryCard": {
+        "statistics": "Statistiky",
+        "compareAdd": "Přidat k porovnání",
+        "compareRemove": "Odebrat",
+        "tooMany": "Příliš mnoho států."
+    }
+}

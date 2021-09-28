@@ -18,15 +18,15 @@ const moduleData = {
               state.filteredCountriesData = state.countriesData.filter(country => {
                 let filterId = ''
       
-                if (country.continent == 'Americas') {
-                  if (['Caribbean', 'South America'].includes(country.region)) {
+                if (country.region == 'Americas') {
+                  if (['Caribbean', 'South America'].includes(country.subregion)) {
                     filterId = 'south_america'
                   } else {
                     filterId = 'north_america'
                   }
                 } else {
-                  if (country.continent && country.region) {
-                    filterId = country.continent.charAt(0).toLowerCase() + country.continent.slice(1)
+                  if (country.region && country.subregion) {
+                    filterId = country.region.charAt(0).toLowerCase() + country.region.slice(1)
                   }
                 }
       
@@ -36,7 +36,7 @@ const moduleData = {
 
             // check if the country has all required data
             state.filteredCountriesData = state.filteredCountriesData.filter(country => {
-              const checkKeys = ['continent', 'region', 'population', 'area']
+              const checkKeys = ['region', 'subregion', 'population', 'area']
 
               const existingKeys = Object.keys(country).reduce((total, current) => {
                 return checkKeys.includes(current) ? total + 1 : total

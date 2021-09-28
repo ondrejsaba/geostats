@@ -7,7 +7,7 @@
         <h2 id="countryNameText">
             <img
                 class="country-icon"
-                :src="countryInfo.flags[0]"
+                :src="countryInfo.flag"
                 :alt="countryName"
             >
             {{ countryName }}
@@ -77,8 +77,8 @@ export default {
         // saves the stats after getting data from the api
         getStats() {
             const {
-                continent,
                 region,
+                subregion,
                 capital,
                 population,
                 area,
@@ -90,8 +90,8 @@ export default {
             } = this.countryInfo
 
             this.displayedStats = {
-                'Continent': continent,
-                'Region': region,
+                'Continent': region,
+                'Region': subregion,
                 'Capital': capital,
                 'Population': population,
                 'Area': `${area} km2`,
@@ -139,7 +139,7 @@ export default {
             const neighborFlags = neighborObjects.map(country => {
                 return {
                     name: country.name,
-                    flag: country.flags[0]
+                    flag: country.flag
                 }
             })
 

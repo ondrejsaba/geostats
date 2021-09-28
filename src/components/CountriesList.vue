@@ -16,14 +16,14 @@
         v-else-if="searchMode"
         class="no-cards"
     >
-        <h2>No countries found.</h2>
+        <h2>{{ messages.countriesList.notFound }}</h2>
     </section>
 
     <section
         v-else
         class="no-cards"
     >
-        <h2>Loading, please wait...</h2>
+        <h2>{{ messages.countriesList.loading }}</h2>
     </section>
 </template>
 
@@ -54,6 +54,9 @@ export default {
         ]),
         ...mapState('options', [
             'options'
+        ]),
+        ...mapState('messages', [
+            'messages'
         ])
     },
     mounted() {

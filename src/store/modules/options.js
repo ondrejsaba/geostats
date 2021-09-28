@@ -7,7 +7,8 @@ const moduleOptions = {
         syncOptions(state) {
             if (!localStorage.localOptions) {
               localStorage.setItem('localOptions', JSON.stringify({
-                darkMode: false
+                darkMode: false,
+                language: 'en'
               }))
             }
       

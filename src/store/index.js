@@ -6,6 +6,7 @@ import moduleComparison from './modules/comparison.js'
 import moduleData from './modules/data.js'
 import moduleOptions from './modules/options.js'
 import moduleDialog from './modules/dialog.js'
+import moduleMessages from './modules/messages.js'
 
 export default createStore({
   modules: {
@@ -15,6 +16,7 @@ export default createStore({
     comparison: moduleComparison,
     data: moduleData,
     options: moduleOptions,
-    dialog: moduleDialog
+    dialog: moduleDialog,
+    messages: moduleMessages
   }
 })

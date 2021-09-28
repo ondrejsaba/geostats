@@ -12,7 +12,7 @@
                 id: id
             })"
         >
-            {{ filter.name.en }}
+            {{ filter }}
         </FilterSelect>
         
         <SelectList
@@ -21,7 +21,7 @@
             :select-options="filterSelectListOptions"
             :options-mod="countryIdToName"
             :static-width="'170px'"
-            :label="'Region:'"
+            :label="messages.filtersLabels.region"
         />
     </section>
 
@@ -30,7 +30,7 @@
             v-model="sortBy"
             :select-options="sortOptions"
             :static-width="'190px'"
-            :label="'Sort by:'"
+            :label="messages.filtersLabels.sortBy"
         />
 
         <SortDirection />
@@ -41,7 +41,6 @@
 import FilterSelect from './FilterSelect.vue'
 import SelectList from './SelectList.vue'
 import SortDirection from './SortDirection.vue'
-import FiltersData from '../json/filters.json'
 import { mapMutations, mapActions, mapState } from 'vuex'
 
 export default {
@@ -52,9 +51,9 @@ export default {
     },
     data() {
         return {
-            filters: FiltersData,
+            filters: {},
             sortOptions: ['Population', 'Population density', 'Area', 'Name'],
-            filterSelectListOptions: [...Object.keys(FiltersData)]
+            filterSelectListOptions: []
         }
     },
     methods: {
@@ -66,12 +65,19 @@ export default {
             'setFilteredCountriesData'
         ]),
         countryIdToName(id) {
-            return FiltersData[id].name.en
+            return this.filters[id]
+        },
+        updateFilters() {
+            this.filters = this.messages.filters,
+            this.filterSelectListOptions = [...Object.keys(this.filters)]
         }
     },
     computed: {
         ...mapState('options', [
             'options'
+        ]),
+        ...mapState('messages', [
+            'messages'
         ]),
         pickedFilter: {
             get() {
@@ -90,6 +96,17 @@ export default {
                 this.setFilteredCountriesData()
             }
         }
+    },
+    watch: {
+        messages: {
+            handler: function() {
+                this.updateFilters()
+            },
+            deep: true
+        }
+    },
+    mounted() {
+        this.updateFilters()
     }
 }
 </script>
