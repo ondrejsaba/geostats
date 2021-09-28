@@ -4,7 +4,7 @@
             <SelectList
                 v-model="compare.selected"
                 :select-options="compare.list"
-                :label="'Compare:'"
+                :label="messages.compare.compare.label"
                 :static-width="'190px'"
             />
 
@@ -12,8 +12,8 @@
                 v-model="chartType.selected"
                 class="pl-20"
                 :select-options="chartType.list"
-                :label="'Chart type:'"
-                :static-width="'80px'"
+                :label="messages.compare.chartType.label"
+                :static-width="'100px'"
             />
 
             <Button
@@ -24,7 +24,7 @@
             >
                 <template v-slot:text>
                     <span id="chart-edit-btn-text">
-                        Edit chart
+                        {{ messages.compare.editChart }}
                     </span>
 
                     <span class="material-icons">
@@ -35,7 +35,7 @@
         </div>
 
         <component
-            :is="chartType.selected"
+            :is="getChartComponent"
             :class="{
                 dark: options.darkMode
             }"
@@ -90,11 +90,27 @@ export default {
             this.setDialog({
                 show: true,
                 component: 'EditChart',
-                title: 'Edit chart',
+                title: this.messages.editChartDialog.title,
                 size: {
                     width: '400px',
                     height: 'auto'
                 }
+            })
+        },
+        updateSelectLists() {
+            this.compare.list = this.messages.compare.compare.options
+            this.chartType.list = this.messages.compare.chartType.options
+
+            const listNames = ['compare', 'chartType']
+
+            listNames.forEach(list => {
+                const sortByLanguage = Object.keys(this.allMessages).filter(lang => {
+                    return this.allMessages[lang].compare[list].options.includes(this[list].selected)
+                }).join()
+
+                const optionIndex = this.allMessages[sortByLanguage].compare[list].options.indexOf(this[list].selected)
+
+                this[list].selected = this.messages.compare[list].options[optionIndex]
             })
         }
     },
@@ -107,7 +123,15 @@ export default {
         ]),
         ...mapState('options', [
             'options'
-        ])
+        ]),
+        ...mapState('messages', [
+            'messages',
+            'allMessages'
+        ]),
+        getChartComponent() {
+            const optionIndex = this.chartType.list.indexOf(this.chartType.selected)
+            return this.allMessages.en.compare.chartType.options[optionIndex]
+        }
     },
     watch: {
         comparisonList: function() {
@@ -120,6 +144,13 @@ export default {
                 if (this.chartType.selected == 'Table') {
                     // sort the comparison list
                 }
+            },
+            deep: true,
+            immediate: true
+        },
+        messages: {
+            handler: function() {
+                setTimeout(this.updateSelectLists, 0)
             },
             deep: true,
             immediate: true

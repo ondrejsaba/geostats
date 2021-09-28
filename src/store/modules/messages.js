@@ -4,6 +4,10 @@ import CzechMessages from '@/json/messages/cz.json'
 const moduleMessages = {
     namespaced: true,
     state: {
+        allMessages: {
+            en: EnglishMessages,
+            cz: CzechMessages
+        },
         messages: {}
     },
     mutations: {

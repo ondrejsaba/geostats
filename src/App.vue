@@ -8,7 +8,7 @@
 
     <transition name="fade">
       <DarkenBox
-        v-if="showDarkenBox || dialog.show"
+        v-if="menuOpened || dialog.show"
       />
     </transition>
 
@@ -73,10 +73,7 @@ export default {
     ]),
     ...mapState('messages', [
       'messages'
-    ]),
-    showDarkenBox() {
-      return this.menuOpened
-    }
+    ])
   },
   mounted() {
     this.syncOptions()

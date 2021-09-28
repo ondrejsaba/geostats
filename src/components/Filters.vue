@@ -30,7 +30,7 @@
             v-model="sortBy"
             :select-options="sortOptions"
             :static-width="'190px'"
-            :label="messages.filtersLabels.sortBy"
+            :label="messages.filtersLabels.sortBy.label"
         />
 
         <SortDirection />
@@ -70,6 +70,20 @@ export default {
         updateFilters() {
             this.filters = this.messages.filters,
             this.filterSelectListOptions = [...Object.keys(this.filters)]
+        },
+        updateSortOptions() {
+            this.sortOptions = this.messages.filtersLabels.sortBy.options
+            
+            // set the selected option to a matching one in the selected language
+            const sortByLanguage = Object.keys(this.allMessages).filter(lang => {
+                return this.allMessages[lang].filtersLabels.sortBy.options.includes(this.sortBy)
+            }).join()
+
+            const optionIndex = this.allMessages[sortByLanguage].filtersLabels.sortBy.options.indexOf(this.sortBy)
+
+            this.setSortBy({
+                sort: this.messages.filtersLabels.sortBy.options[optionIndex]
+            })
         }
     },
     computed: {
@@ -77,7 +91,8 @@ export default {
             'options'
         ]),
         ...mapState('messages', [
-            'messages'
+            'messages',
+            'allMessages'
         ]),
         pickedFilter: {
             get() {
@@ -101,12 +116,11 @@ export default {
         messages: {
             handler: function() {
                 this.updateFilters()
+                this.updateSortOptions()
             },
-            deep: true
+            deep: true,
+            immediate: true
         }
-    },
-    mounted() {
-        this.updateFilters()
     }
 }
 </script>

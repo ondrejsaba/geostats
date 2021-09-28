@@ -20,11 +20,12 @@ const chart = {
         getCountryData(name) {
             const data = this.countriesData.filter(country => country.name == name)[0]
             const {population, area} = data
+            const [comparePopulation, comparePopulationDensity, compareArea] = this.messages.compare.compare.options
 
             return {
-                'Population': population,
-                'Area': area,
-                'Population density': population / area
+                [comparePopulation]: population,
+                [comparePopulationDensity]: area,
+                [compareArea]: population / area
             }
         },
         setGraphData() {
@@ -91,6 +92,9 @@ const chart = {
         ]),
         ...mapState('comparison', [
             'chartColors'
+        ]),
+        ...mapState('messages', [
+            'messages'
         ]),
         graphMax() {
            return Math.max(...this.graphData.map(bar => bar.value))

@@ -22,7 +22,14 @@
     },
     "filtersLabels": {
         "region": "Region:",
-        "sortBy": "Řadit dle:"
+        "sortBy": {
+            "label": "Řadit dle:",
+            "options": ["Počet obyvatel", "Hustota zalidnění", "Území", "Název"]
+        },
+        "direction": {
+            "ascend": "Vzestupně",
+            "descend": "Sestupně"
+        }
     },
     "countriesList": {
         "notFound": "Nebyly nalezeny žádné státy.",
@@ -33,5 +40,25 @@
         "compareAdd": "Přidat k porovnání",
         "compareRemove": "Odebrat",
         "tooMany": "Příliš mnoho států."
+    },
+    "compare": {
+        "compare": {
+            "label": "Srovnat:",
+            "options": ["Počet obyvatel", "Hustota zalidnění", "Území"]
+        },
+        "chartType": {
+            "label": "Typ grafu:",
+            "options": ["Sloupce", "Kruh", "Tabulka"]
+        },
+        "editChart": "Upravit",
+        "table": {
+            "flag": "Vlajka",
+            "countryName": "Stát"
+        }
+    },
+    "editChartDialog": {
+        "title": "Upravit srovnání",
+        "reverse": "Obrátit seznam",
+        "removeAll": "Odebrat vše"
     }
 }

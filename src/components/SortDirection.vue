@@ -12,11 +12,11 @@
 
         <template v-slot:hint>
             <span v-if="sortDirection == 'ascend'">
-                Ascending
+                {{ messages.filtersLabels.direction.ascend }}
             </span>
 
             <span v-else>
-                Descending
+                {{ messages.filtersLabels.direction.descend }}
             </span>
         </template>
     </Button>
@@ -38,6 +38,9 @@ export default {
     computed: {
         ...mapState('filters', [
             'sortDirection'
+        ]),
+        ...mapState('messages', [
+            'messages'
         ])
     }
 }

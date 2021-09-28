@@ -48,14 +48,16 @@ const moduleData = {
         reverseFilteredCountriesData(state) {
             state.filteredCountriesData = state.filteredCountriesData.reverse()
         },
-        sortFilteredCountriesData(state, { comparator }) {
+        sortFilteredCountriesData(state, { comparator, messages }) {
+          const [population, populationDensity, area, name] = messages.filtersLabels.sortBy.options
+
           state.filteredCountriesData = state.filteredCountriesData.sort((a, b) => {
-            const sortingComparators = {
-              'Name': a.name.localeCompare(b.name),
-              'Population': a.population < b.population ? 1 : -1,
-              'Population density': (a.population / a.area) < (b.population / b.area) ? 1 : -1,
-              'Area': a.area < b.area ? 1 : -1
-            }
+            const sortingComparators = Object.assign({}, {
+              [name]: a.name.localeCompare(b.name),
+              [population]: a.population < b.population ? 1 : -1,
+              [populationDensity]: (a.population / a.area) < (b.population / b.area) ? 1 : -1,
+              [area]: a.area < b.area ? 1 : -1
+            })
     
             return sortingComparators[comparator]
           })
@@ -74,7 +76,8 @@ const moduleData = {
             })
 
             commit('sortFilteredCountriesData', {
-              comparator: rootState.filters.sortBy
+              comparator: rootState.filters.sortBy,
+              messages: rootState.messages.messages
             })
 
             commit('keepOrder', {

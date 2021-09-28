@@ -8,11 +8,11 @@
         >
             <div class="row heading">
                 <div class="col-1 col-border">
-                    Flag
+                    {{ messages.compare.table.flag }}
                 </div>
 
                 <div class="col-10 col-border">
-                    Country name
+                    {{ messages.compare.table.countryName }}
                 </div>
 
                 <div
@@ -100,6 +100,9 @@ export default {
         ]),
         ...mapState('options', [
             'options'
+        ]),
+        ...mapState('messages', [
+            'messages'
         ])
     },
     watch: {

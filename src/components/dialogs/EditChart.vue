@@ -58,7 +58,7 @@
                 @click="reverseCountries"
             >
                 <template v-slot:text>
-                    Reverse
+                    {{ messages.editChartDialog.reverse }}
                 </template>
             </Button>
             
@@ -69,7 +69,7 @@
                 @click="removeAllCountries"
             >
                 <template v-slot:text>
-                    Remove all countries
+                    {{ messages.editChartDialog.removeAll }}
                 </template>
             </Button>
         </div>
@@ -98,8 +98,8 @@ export default {
         getCountryFlag(name) {
             const data = this.countriesData.filter(country => country.name == name)[0]
 
-            const { flags: [ flagSvg ] } = data
-            return flagSvg
+            const { flag } = data
+            return flag
         },
         moveCountry(country, direction) {
             let list = [...this.comparisonList]
@@ -158,6 +158,9 @@ export default {
         ]),
         ...mapState('options', [
             'options'
+        ]),
+        ...mapState('messages', [
+            'messages'
         ])
     }
 }

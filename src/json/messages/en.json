@@ -22,7 +22,14 @@
     },
     "filtersLabels": {
         "region": "Region:",
-        "sortBy": "Sort by:"
+        "sortBy": {
+            "label": "Sort by:",
+            "options": ["Population", "Population density", "Area", "Name"]
+        },
+        "direction": {
+            "ascend": "Ascending",
+            "descend": "Descending"
+        }
     },
     "countriesList": {
         "notFound": "No countries found.",
@@ -33,5 +40,25 @@
         "compareAdd": "Add to comparison",
         "compareRemove": "Remove",
         "tooMany": "Too many countries."
+    },
+    "compare": {
+        "compare": {
+            "label": "Compare:",
+            "options": ["Population", "Population density", "Area"]
+        },
+        "chartType": {
+            "label": "Chart type:",
+            "options": ["Bar", "Pie", "Table"]
+        },
+        "editChart": "Edit chart",
+        "table": {
+            "flag": "Flag",
+            "countryName": "Country name"
+        }
+    },
+    "editChartDialog": {
+        "title": "Edit chart",
+        "reverse": "Reverse",
+        "removeAll": "Remove all countries"
     }
 }
