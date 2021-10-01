@@ -24,8 +24,8 @@ const chart = {
 
             return {
                 [comparePopulation]: population,
-                [comparePopulationDensity]: area,
-                [compareArea]: population / area
+                [compareArea]: area,
+                [comparePopulationDensity]: population / area
             }
         },
         setGraphData() {
