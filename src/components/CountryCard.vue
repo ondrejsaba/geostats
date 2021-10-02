@@ -190,6 +190,7 @@ export default {
 }
 
 .btns-wrapper {
+    display: table;
     position: absolute;
     left: 50%;
     bottom: 25px;
