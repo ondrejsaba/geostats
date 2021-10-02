@@ -14,16 +14,16 @@
         </h2>
 
         <p
-            v-for="(statValue, statName) in displayedStats"
+            v-for="(stat, statName) in displayedStats"
             :key="statName"
         >
             <span class="material-icons">
-                {{ statIcons[statName] }}
+                {{ stat.icon }}
             </span>
 
-            <span class="bold pr-10">{{ statName }}:</span>
+            <span class="bold pr-10">{{ messages.statistics[statName] }}:</span>
             
-            {{ statValue }}
+            {{ stat.value }}
         </p>
 
         <p>
@@ -31,7 +31,7 @@
                 flag
             </span>
 
-            <span class="bold pr-10">Neighboring countries:</span>
+            <span class="bold pr-10">{{ messages.statistics.neighboringCountries }}:</span>
 
             <span v-if="neighborFlags.length > 0">
                 <img
@@ -56,17 +56,7 @@ import { mapActions, mapState } from 'vuex'
 export default {
     data() {
         return {
-            displayedStats: {},
-            statIcons: {
-                'Continent': 'public',
-                'Region': 'place',
-                'Capital': 'home',
-                'Population': 'sentiment_satisfied',
-                'Area': 'layers',
-                'Population density': 'groups',
-                'Timezones': 'schedule',
-                'Currency': 'payments'
-            }
+            displayedStats: {}
         }
     },
     methods: {
@@ -90,14 +80,38 @@ export default {
             } = this.countryInfo
 
             this.displayedStats = {
-                'Continent': region,
-                'Region': subregion,
-                'Capital': capital,
-                'Population': population,
-                'Area': `${area} km2`,
-                'Population density': `${(population / area).toFixed(2)}/km2`,
-                'Timezones': timezones.length > 1 ? timezones.join(', ') : timezones.join(''),
-                'Currency': `${name} (${code})`
+                'continent': {
+                    icon: 'public',
+                    value: region
+                },
+                'region': {
+                    icon: 'place',
+                    value: subregion
+                },
+                'capital': {
+                    icon: 'home',
+                    value: capital
+                },
+                'population': {
+                    icon: 'sentiment_satisfied',
+                    value: population
+                },
+                'area': {
+                    icon: 'layers',
+                    value: `${area} km2`
+                },
+                'populationDensity': {
+                    icon: 'groups',
+                    value: `${(population / area).toFixed(2)}/km2`
+                },
+                'timezones': {
+                    icon: 'schedule',
+                    value: timezones.length > 1 ? timezones.join(', ') : timezones.join('')
+                },
+                'currency': {
+                    icon: 'payments',
+                    value: `${name} (${code})`
+                }
             }
         }
     },
@@ -107,6 +121,9 @@ export default {
         ]),
         ...mapState('options', [
             'options'
+        ]),
+        ...mapState('messages', [
+            'messages'
         ]),
 
         // gets the name of the country based on the route
@@ -156,7 +173,6 @@ export default {
     mounted() {
         // if there was no prior communication with the API, then get the data
         if (!this.countryInfoLoaded) {
-            console.log('loading countries data')
             this.getCountriesData()
         } else {
             this.getStats()

@@ -60,5 +60,16 @@
         "title": "Upravit srovnání",
         "reverse": "Obrátit seznam",
         "removeAll": "Odebrat vše"
+    },
+    "statistics": {
+        "continent": "Kontinent",
+        "region": "Region",
+        "capital": "Hlavní město",
+        "population": "Počet obyvatel",
+        "area": "Území",
+        "populationDensity": "Hustota zalidnění",
+        "timezones": "Časové zóny",
+        "currency": "Měna",
+        "neighboringCountries": "Sousední státy"
     }
 }

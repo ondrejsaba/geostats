@@ -60,5 +60,16 @@
         "title": "Edit chart",
         "reverse": "Reverse",
         "removeAll": "Remove all countries"
+    },
+    "statistics": {
+        "continent": "Continent",
+        "region": "Region",
+        "capital": "Capital",
+        "population": "Population",
+        "area": "Area",
+        "populationDensity": "Population density",
+        "timezones": "Timezones",
+        "currency": "Currency",
+        "neighboringCountries": "Neighboring countries"
     }
 }
