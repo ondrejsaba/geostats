@@ -2,7 +2,8 @@ const moduleData = {
     namespaced: true,
     state: {
         countriesData: [],
-        filteredCountriesData: []
+        filteredCountriesData: [],
+        dataError: false
     },
     mutations: {
         setCountriesData(state, { data }) {
@@ -66,13 +67,16 @@ const moduleData = {
           if (filters.sortDirection == 'ascend') {
             state.filteredCountriesData = state.filteredCountriesData.reverse()
           }
+        },
+        setDataError(state, { value }) {
+          state.dataError = value
         }
     },
     actions: {
         setFilteredCountriesData({ commit, rootState }) {
             commit('setFilteredCountriesData', {
-                search: rootState.search,
-                filters: rootState.filters
+              search: rootState.search,
+              filters: rootState.filters
             })
 
             commit('sortFilteredCountriesData', {
@@ -87,11 +91,14 @@ const moduleData = {
         getCountriesData({ commit, dispatch }) {
             fetch('https://restcountries.com/v2/all')
               .then((response) => {
-                  return response.json()
+                return response.json()
               })
               .then((data) => {
-                  commit('setCountriesData', {data: data})
-                  dispatch('setFilteredCountriesData')
+                commit('setCountriesData', {data: data})
+                dispatch('setFilteredCountriesData')
+              })
+              .catch(() => {
+                commit('setDataError', {value: true})
               })
         }
     }
