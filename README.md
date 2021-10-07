@@ -1,4 +1,4 @@
-# Geostats
+# Geostats 🌍
 A Vue web app that allows you to compare all countries of the world.
 
 ## Features
@@ -10,12 +10,12 @@ A Vue web app that allows you to compare all countries of the world.
 
 ## Screenshots
 ### Main page  
-![Main page with light mode](https://i.imgur.com/0OwJnmZ.png)  
+![Main page with light mode](https://i.imgur.com/pqLUval.png)  
 ### Main page (with dark mode enabled)  
-![Main page with dark mode](https://i.imgur.com/QvggIEV.png)  
+![Main page with dark mode](https://i.imgur.com/dcerwzb.png)  
 ### Comparison charts
-![Bar chart](https://i.imgur.com/L8JWdui.png)  
-![Pie chart](https://i.imgur.com/AvnN6Nk.png)
+![Bar chart](https://i.imgur.com/Y1lhwaS.png)  
+![Pie chart](https://i.imgur.com/3auBmaq.png)
 
 ## Production build
 ```
