@@ -209,6 +209,17 @@
             }
         }
     }
+
+    // compare button
+
+    #compare-btn {
+        width: 40px;
+        padding: 0;
+
+        span.btn-text {
+            display: none;
+        }
+    }
 }
 
 // height based media queries

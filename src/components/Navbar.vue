@@ -15,6 +15,7 @@
 
             <Button
                 v-if="comparisonList.length && $route.name == 'Home'"
+                id="compare-btn"
                 class="right m-text mt-10"
                 :class="{
                     primary: comparisonList.length >= 2,
@@ -22,14 +23,11 @@
                     light: comparisonList.length == 1 && !options.darkMode
                 }"
                 :ignoreColorMode="true"
+                :icon="'bar_chart'"
                 @click="compare"
             >
                 <template v-slot:text>
                     {{ messages.navbar.compare }} ({{ comparisonList.length }})
-
-                    <span class="material-icons">
-                        bar_chart
-                    </span>
                 </template>
 
                 <template v-if="comparisonList.length == 1" v-slot:hint>

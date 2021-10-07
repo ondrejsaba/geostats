@@ -6,11 +6,13 @@
             light: !options.darkMode && !ignoreColorMode
         }"
     >
-        <slot v-if="$slots.text" name="text">
-            Button
-        </slot>
+        <span class="btn-text">
+            <slot v-if="$slots.text" name="text">
+                Button
+            </slot>
+        </span>
 
-        <span v-if="icon" class="material-icons">
+        <span v-if="icon" class="material-icons btn-icon">
             {{ icon }}
         </span>
 

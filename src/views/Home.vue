@@ -1,15 +1,15 @@
 <template>
-  <div class="content" v-if="!dataError">
+  <main class="content" v-if="!dataError">
     <Search />
     <Filters
       v-if="!searchMode"
     />
     <CountriesList />
-  </div>
+  </main>
 
-  <div v-else>
+  <main v-else>
     <LoadError />
-  </div>
+  </main>
 </template>
 
 <script>
