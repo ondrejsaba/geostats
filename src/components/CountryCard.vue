@@ -190,12 +190,10 @@ export default {
 }
 
 .btns-wrapper {
-    display: table;
-    position: absolute;
-    left: 50%;
-    bottom: 25px;
+    display: block;
+    margin: -50px auto 20px;
+    margin-top: -50px;
     width: fit-content;
-    transform: translateX(-50%);
 }
 
 @import "../sass/_mediaqueries.scss";
